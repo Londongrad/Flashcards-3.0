@@ -1,0 +1,34 @@
+﻿<Application x:Class="Flashcards.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:viewModels="clr-namespace:Flashcards.ViewModels.UserControls"
+             xmlns:views="clr-namespace:Flashcards.Views.UserControls">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/wwwroot/Themes/MenuButtonTheme.xaml" />
+                <ResourceDictionary Source="/wwwroot/Themes/CSButtonTheme.xaml" />
+                <ResourceDictionary Source="/wwwroot/Themes/SetButtonTheme.xaml" />
+                <ResourceDictionary Source="/wwwroot/Themes/ToggleButtonTheme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewModels:CSViewModel}">
+                <views:CSView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:SetsViewModel}">
+                <views:SetsView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:SetViewModel}">
+                <views:SetView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModels:SelectedSetViewModel}">
+                <views:SelectedSetView />
+            </DataTemplate>
+
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

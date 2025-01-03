@@ -1,0 +1,188 @@
+﻿<UserControl x:Class="Flashcards.Views.UserControls.CSView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="800"
+             d:DesignWidth="800">
+    
+    <StackPanel >
+        <TextBlock Text="Set creation"
+                   Foreground="AliceBlue"
+                   HorizontalAlignment="Center"
+                   FontSize="24"
+                   FontWeight="Light"
+                   Margin="0 20 0 20" />
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <TextBox Foreground="AliceBlue"
+                     HorizontalAlignment="Center"
+                     MaxLength="2"
+                     Height="40"
+                     Width="50"
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Center"
+                     FontSize="20"
+                     Background="Transparent"
+                     Text="{Binding Set, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"
+                     CaretBrush="AliceBlue"
+                     Margin="155 0 0 0" />
+
+            <Button Command="{Binding CreateSetCommand}"
+                    Content="Create only set"
+                    Style="{StaticResource CSButtons}"
+                    Margin="20 0 0 0"
+                    Background="Transparent"
+                    Foreground="AliceBlue"
+                    FontSize="18"
+                    FontWeight="Light"
+                    Padding="10"
+                    BorderBrush="AntiqueWhite">
+
+            </Button>
+        </StackPanel>
+
+
+        <TextBlock Text="Word"
+                   Foreground="AliceBlue"
+                   HorizontalAlignment="Center"
+                   FontSize="24"
+                   FontWeight="Light"
+                   Margin="0 10 0 5" />
+        <Grid>
+
+            <TextBox Foreground="AliceBlue"
+                     HorizontalAlignment="Center"
+                     Height="40"
+                     Width="250"
+                     VerticalContentAlignment="Center"
+                     HorizontalContentAlignment="Center"
+                     FontSize="20"
+                     Background="Transparent"
+                     Text="{Binding WordName, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"
+                     CaretBrush="AliceBlue" />
+            
+            <Image Source="/wwwroot/Images/ex.png"
+                   Height="50"
+                   Width="50"
+                   Margin="310 0 0 0"
+                   Visibility="{Binding ExVis}" />
+
+        </Grid>
+        <TextBlock Text="Definition"
+                   Foreground="AliceBlue"
+                   HorizontalAlignment="Center"
+                   FontSize="24"
+                   FontWeight="Light"
+                   Margin="0 10 0 5" />
+
+        <TextBox Foreground="AliceBlue"
+                 HorizontalAlignment="Center"
+                 Height="40"
+                 Width="500"
+                 VerticalContentAlignment="Center"
+                 HorizontalContentAlignment="Center"
+                 FontSize="20"
+                 Background="Transparent"
+                 Text="{Binding Definition, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"
+                 CaretBrush="AliceBlue" />
+        <Grid>
+            <Button Style="{StaticResource CSButtons}"
+                    Content="Path to the Image"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0 20 0 0"
+                    Background="Transparent"
+                    Foreground="AliceBlue"
+                    FontSize="24"
+                    FontWeight="Light"
+                    Padding="10"
+                    BorderBrush="AntiqueWhite"
+                    Command="{Binding FindImageCommand}" />
+
+            <Image Source="/wwwroot/Images/ok.png"
+                   Height="50"
+                   Width="50"
+                   Margin="270 20 0 0"
+                   Visibility="{Binding ThumbUpVis}" />
+        </Grid>
+
+
+        <Button Content="Save the word"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="0 20 0 0"
+                Background="Transparent"
+                Foreground="AliceBlue"
+                FontSize="24"
+                FontWeight="Light"
+                Padding="10"
+                BorderBrush="AntiqueWhite"
+                Command="{Binding AddWordCommand}"
+                Style="{StaticResource CSButtons}" />
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Margin="0 80 0 0">
+                <TextBox Foreground="AliceBlue"
+                         HorizontalAlignment="Center"
+                         Height="30"
+                         Width="60"
+                         VerticalContentAlignment="Center"
+                         HorizontalContentAlignment="Center"
+                         FontSize="20"
+                         Background="Transparent"
+                         Text="{Binding NameDeleteSet, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"
+                         CaretBrush="AliceBlue"
+                         MaxLength="2" />
+
+                <Button Content="Delete Set"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0 20 0 0"
+                        Background="Transparent"
+                        Foreground="AliceBlue"
+                        FontSize="24"
+                        FontWeight="Light"
+                        Padding="10"
+                        BorderBrush="AntiqueWhite"
+                        Command="{Binding DeleteSetCommand}"
+                        Style="{StaticResource CSButtons}" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="1"
+                        Margin="0 80 0 0">
+                <TextBox Foreground="AliceBlue"
+                         HorizontalAlignment="Center"
+                         Height="30"
+                         Width="150"
+                         VerticalContentAlignment="Center"
+                         HorizontalContentAlignment="Center"
+                         FontSize="20"
+                         Background="Transparent"
+                         Text="{Binding NameDeleteWord, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"
+                         CaretBrush="AliceBlue" />
+
+                <Button Content="Delete Word"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Margin="0 20 0 0"
+                        Background="Transparent"
+                        Foreground="AliceBlue"
+                        FontSize="24"
+                        FontWeight="Light"
+                        Padding="10"
+                        BorderBrush="AntiqueWhite"
+                        Command="{Binding DeleteWordCommand}"
+                        Style="{StaticResource CSButtons}" />
+            </StackPanel>
+
+        </Grid>
+
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,83 @@
+﻿<Window x:Class="Flashcards.Views.Windows.EditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        x:Name="Edit"
+        Title="EditWindow"
+        Height="650"
+        Width="1000"
+        WindowStyle="None"
+        ResizeMode="CanResize"
+        Background="Transparent"
+        AllowsTransparency="True"
+        MouseLeftButtonDown="Window_MouseLeftButtonDown"
+        WindowStartupLocation="CenterScreen">
+
+    <Border Background="#FF483D8B"
+            CornerRadius="40">
+        <StackPanel>
+            <TextBox Text="{Binding Name}"
+                     Background="Transparent"
+                     Foreground="AliceBlue"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Stretch"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center"
+                     FontSize="30"
+                     MinWidth="90"
+                     Margin="0 40 0 0"
+                     BorderThickness="0.6"
+                     BorderBrush="Black" />
+
+            <TextBox Text="{Binding Definition}"
+                     Background="Transparent"
+                     Foreground="AliceBlue"
+                     HorizontalAlignment="Center"
+                     VerticalAlignment="Stretch"
+                     HorizontalContentAlignment="Center"
+                     VerticalContentAlignment="Center"
+                     FontSize="30"
+                     MinWidth="90"
+                     Margin="0 40 0 20"
+                     BorderThickness="0.6"
+                     BorderBrush="Black"/>
+
+            <Image x:Name="Image"
+                   Source="{Binding ImagePath}"
+                   Height="350" />
+
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{StaticResource CSButtons}"
+                        BorderThickness="0"
+                        Background="#FF483D8B"
+                        Height="60"
+                        Foreground="White"
+                        FontSize="30"
+                        Margin="350 30 0 0"
+                        Content="Save"
+                        Padding="10"
+                        Command="{Binding SaveChangesCommand}"
+                        CommandParameter="{Binding ElementName=Edit}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center">
+                </Button>
+
+                <Button Style="{StaticResource CSButtons}"
+                        BorderThickness="0"
+                        Background="#FF483D8B"
+                        Height="60"
+                        Foreground="White"
+                        FontSize="30"
+                        Margin="50 30 0 0"
+                        Content="Change Image"
+                        Padding="10"
+                        Command="{Binding ChangeImageCommand}"
+                        HorizontalAlignment="Center">
+                </Button>
+
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</Window>
