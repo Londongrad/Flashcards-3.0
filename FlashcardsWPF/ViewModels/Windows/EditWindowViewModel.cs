@@ -47,7 +47,7 @@ namespace Flashcards.ViewModels
         #region [ Methods ]
         private async void SaveChanges(Window window)
         {
-            if(Name == "" || Definition == "") { return; }
+            if (Name == "" || Definition == "") { return; }
             try
             {
                 await wordRepository.UpdateAsync(word);

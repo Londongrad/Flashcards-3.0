@@ -1,4 +1,5 @@
 ﻿using Flashcards.Core.Commands.Base;
+using Flashcards.Repositoties.Abstract;
 using Flashcards.Services.Abstracts;
 using Flashcards.ViewModels.Base;
 using Flashcards.ViewModels.UserControls;
@@ -9,14 +10,17 @@ namespace Flashcards.ViewModels.Windows
     public delegate Task SetCommand(int num);
     public class MainWindowViewModel : ViewModel
     {
-        public MainWindowViewModel(INavigationService navigationService)
-        {
-            Navigation = navigationService;
-        }
 
         #region [ Fields ]
         private INavigationService? _navigation;
+        private IWordRepository? _wordRepository;
         #endregion
+
+        public MainWindowViewModel(INavigationService navigationService, IWordRepository wordRepository)
+        {
+            Navigation = navigationService;
+            _wordRepository = wordRepository;
+        }
 
         #region [ Properties ]
         public INavigationService Navigation
@@ -58,6 +62,18 @@ namespace Flashcards.ViewModels.Windows
             (
             execute => SelectedSetViewModel.setCommand!(3),
             canExecute => Navigation!.CurrentView is SelectedSetViewModel
+            );
+        public RelayCommand Import => new RelayCommand(async execute =>
+            {
+                //var words = new List<WordEntity>();
+                //var path = "C:\\Users\\h-b-1\\Desktop\\words.json";
+
+                //var res = JsonConvert.DeserializeObject<List<WordEntity>>(File.ReadAllText(path))!;
+                //foreach (var word in res)
+                //{
+                //    await _wordRepository!.AddAsync(word);
+                //}
+            }
             );
         #endregion
 

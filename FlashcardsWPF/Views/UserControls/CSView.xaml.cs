@@ -1,5 +1,4 @@
-﻿using Flashcards.ViewModels.UserControls;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace Flashcards.Views.UserControls
 {

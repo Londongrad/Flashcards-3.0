@@ -1,6 +1,6 @@
 ﻿using Flashcards.Models;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Flashcards.Configurations
 {

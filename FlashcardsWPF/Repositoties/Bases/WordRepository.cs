@@ -15,20 +15,20 @@ namespace Flashcards.Repositoties.Bases
         public async Task AddAsync(WordEntity word)
         {
             using var _context = _contextFactory.CreateDbContext();
-            await _context.Words.AddAsync(word);
+            await _context.Words!.AddAsync(word);
             await _context.SaveChangesAsync();
         }
         public async Task DeleteAsync(string name)
         {
             using var _context = _contextFactory.CreateDbContext();
-            await _context.Words
+            await _context.Words!
                 .Where(o => o.Name == name)
                 .ExecuteDeleteAsync();
         }
         public async Task UpdateAsync(WordEntity word)
         {
             using var _context = _contextFactory.CreateDbContext();
-            await _context.Words
+            await _context.Words!
                .Where(o => o.Id == word.Id)
                .ExecuteUpdateAsync(sp => sp
                    .SetProperty(c => c.Name, word.Name)
@@ -40,7 +40,7 @@ namespace Flashcards.Repositoties.Bases
         public async Task<bool> CheckWordIfExistsAsync(string name)
         {
             using var _context = _contextFactory.CreateDbContext();
-            return await _context.Words.FirstOrDefaultAsync(o => o.Name == name) is not null;
+            return await _context.Words!.FirstOrDefaultAsync(o => o.Name == name) is not null;
         }
         #endregion
     }
