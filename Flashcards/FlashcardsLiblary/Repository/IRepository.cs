@@ -25,7 +25,7 @@ namespace FlashcardsLiblary.Repository
         /// <remarks>Если не удалось удалить, то выкидывается исключение.</remarks>
         Task DeleteAsync(int id);
 
-        ObservableCollection<TId> GetAllAsync();
+        Task<ReadOnlyObservableCollection<TId>> GetAllAsync();
 
         /// <summary>Явная загрузка данных из бд (Explicit loading)</summary>
         Task LoadAsync();

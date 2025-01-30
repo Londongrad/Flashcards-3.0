@@ -10,6 +10,8 @@
                 <ResourceDictionary Source="/wwwroot/Themes/CSButtonTheme.xaml" />
                 <ResourceDictionary Source="/wwwroot/Themes/SetButtonTheme.xaml" />
                 <ResourceDictionary Source="/wwwroot/Themes/ToggleButtonTheme.xaml" />
+                <ResourceDictionary Source="/wwwroot/Themes/TextBlockOnAddTheme.xaml" />
+                <ResourceDictionary Source="/wwwroot/Themes/TextBoxOnAddTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <DataTemplate DataType="{x:Type vm:CSViewModel}">
