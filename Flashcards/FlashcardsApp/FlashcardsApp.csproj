@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="wwwroot\Images\ex.png" />
+    <None Remove="wwwroot\Images\ok.png" />
+    <None Remove="wwwroot\Images\shutdown.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FlashcardsLiblary\FlashcardsLiblary.csproj" />
+    <ProjectReference Include="..\FlashcardsRepository\FlashcardsRepository.csproj" />
+    <ProjectReference Include="..\FlashcardsViewModel\FlashcardsViewModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="wwwroot\Images\ex.png" />
+    <Resource Include="wwwroot\Images\ok.png" />
+    <Resource Include="wwwroot\Images\shutdown.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
