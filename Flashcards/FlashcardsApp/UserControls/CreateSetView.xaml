@@ -1,15 +1,15 @@
-﻿<UserControl x:Class="FlashcardsApp.UserControls.CSView"
+﻿<UserControl x:Class="FlashcardsApp.UserControls.CreateSetView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:FlashcardsViewModels.UserControls;assembly=FlashcardsViewModels"
-             d:DataContext="{d:DesignInstance vm:CSViewModel}"
+             d:DataContext="{d:DesignInstance vm:CreateSetViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="800"
              d:DesignWidth="800">
 
-    <StackPanel Margin="0 100 0 0">
+    <StackPanel Margin="0 50 0 0">
 
         <TextBlock Text="Set creation"
                    Style="{StaticResource TextBlockOnAddStyle}" />
@@ -18,9 +18,12 @@
                     HorizontalAlignment="Center">
 
             <TextBox Style="{StaticResource TextBoxOnAddStyle}"
-                     Text="{Binding Set}" />
+                     Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
 
-            <Button Command="{Binding CreateSetCommand}"
+            <Button Command="{Binding CreateSetCommand, 
+                                      Mode=OneWay, 
+                                      Source={StaticResource mainVM}}"
+                    CommandParameter="{Binding}"
                     Content="Create only set"
                     Style="{StaticResource CSButtons}"
                     Margin="20 0 0 0">
@@ -36,7 +39,7 @@
                     HorizontalAlignment="Center">
 
             <TextBox Style="{StaticResource TextBoxOnAddStyle}"
-                     Text="{Binding WordName, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding WordName, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" />
 
             <Image Source="/wwwroot/Images/ex.png"
                    Height="50"
@@ -44,25 +47,25 @@
                    Visibility="{Binding ExVis}" />
 
         </StackPanel>
-        
+
         <TextBlock Text="Definition"
                    Style="{StaticResource TextBlockOnAddStyle}" />
 
         <TextBox Style="{StaticResource TextBoxOnAddStyle}"
                  Text="{Binding Definition}"
-                 Width="300"/>
+                 Width="300" />
 
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center">
 
             <Button Style="{StaticResource CSButtons}"
                     Content="Path to the Image"
-                    Command="{Binding FindImageCommand}"/>
+                    Command="{Binding FindImageCommand}" />
 
             <Image Source="/wwwroot/Images/ok.png"
                    Height="50"
                    Width="50"
-                   Visibility="{Binding ThumbUpVis}"/>
+                   Visibility="{Binding ThumbUpVis}" />
         </StackPanel>
 
         <Button Content="Save the word"
@@ -89,7 +92,7 @@
                         Margin="0 80 0 0">
 
                 <TextBox Style="{StaticResource TextBoxOnAddStyle}"
-                         Text="{Binding NameDeleteWord}"/>
+                         Text="{Binding NameDeleteWord}" />
 
                 <Button Content="Delete Word"
                         Command="{Binding DeleteWordCommand}"

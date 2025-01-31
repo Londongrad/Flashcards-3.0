@@ -91,11 +91,11 @@ namespace FlashcardsRepository
         });
 
         private ReadOnlyObservableCollection<Set>? setsReadOnlyObservableCollection;
-        public async Task<ReadOnlyObservableCollection<Set>> GetAllAsync() => await Task.Run(() =>
+        public ReadOnlyObservableCollection<Set> GetAllAsync()
         {
             setsReadOnlyObservableCollection ??= new(_sets.Local.ToObservableCollection());
             return setsReadOnlyObservableCollection;
-        });
+        }
 
         static DbSetRepository()
         {

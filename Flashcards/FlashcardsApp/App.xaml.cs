@@ -1,18 +1,26 @@
 ﻿using FlashcardsApp.Windows;
+using FlashcardsLiblary;
+using FlashcardsViewModels.Windows;
 using System.Windows;
 
 namespace FlashcardsApp
 {
     public partial class App : Application
     {
-        public static IServiceProvider? ServiceProvider { get; private set; }
-
-        protected override void OnStartup(StartupEventArgs e)
+        public App()
         {
-            var mainWindow = new MainWindow();
-            mainWindow.Show();
+            Startup += async (s, e) =>
+            {
+                MainViewModel vm = (MainViewModel)FindResource("mainVM");
+                vm.Sets.EnableCollectionSynchronization();
+                await vm.LoadAsync();
+            };
+        }
 
-            base.OnStartup(e);
+        private void OnStartup(object sender, StartupEventArgs e)
+        {
+            MainWindow = new MainWindow();
+            MainWindow.Show();
         }
     }
 }

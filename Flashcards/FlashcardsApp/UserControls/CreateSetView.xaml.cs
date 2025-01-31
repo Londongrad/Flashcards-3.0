@@ -2,9 +2,9 @@
 
 namespace FlashcardsApp.UserControls
 {
-    public partial class CSView : UserControl
+    public partial class CreateSetView : UserControl
     {
-        public CSView()
+        public CreateSetView()
         {
             InitializeComponent();
         }

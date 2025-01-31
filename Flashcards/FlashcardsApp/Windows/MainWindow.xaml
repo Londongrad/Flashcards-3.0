@@ -3,6 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:comm="clr-namespace:FlashcardsLiblary;assembly=FlashcardsLiblary"
+        xmlns:vm="clr-namespace:FlashcardsViewModels.UserControls;assembly=FlashcardsViewModels"
         mc:Ignorable="d"
         Height="900"
         Width="1500"
@@ -11,7 +13,8 @@
         Background="Transparent"
         AllowsTransparency="True"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        DataContext="{DynamicResource mainVM}">
 
     <Window.InputBindings>
         <KeyBinding Key="Down"
@@ -57,23 +60,19 @@
 
             <StackPanel VerticalAlignment="Center"
                         Grid.Row="1">
+                
                 <RadioButton Content="Menu"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="20"
                              Style="{StaticResource MenuButtonTheme}"
                              IsChecked="True"
-                             Command="{Binding NavigateToCSViewCommand}" />
+                             Command="{Binding Path=(comm:INavigationService.NavigateToTypeCommand)}" 
+                             CommandParameter="{x:Type vm:CreateSetViewModel}"/>
+                
                 <RadioButton Content="Sets"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="20"
                              Style="{StaticResource MenuButtonTheme}"
-                             Command="{Binding NavigateToSetsViewCommand}" />
+                             Command="{Binding Path=(comm:INavigationService.NavigateToTypeCommand)}"
+                             CommandParameter="{x:Type vm:SetsViewModel}"/>
+                
                 <RadioButton Content="Import"
-                             Height="50"
-                             Foreground="White"
-                             FontSize="20"
                              Style="{StaticResource MenuButtonTheme}"
                              Command="{Binding Import}" />
 
@@ -82,7 +81,7 @@
             <ContentControl Grid.Column="1"
                             Grid.Row="1"
                             Margin="20"
-                            Content="{Binding Navigation.CurrentView}">
+                            Content="{Binding Path=(comm:INavigationService.Current)}">
             </ContentControl>
         </Grid>
     </Border>

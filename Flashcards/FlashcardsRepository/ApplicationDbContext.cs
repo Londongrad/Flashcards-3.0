@@ -18,7 +18,7 @@ namespace FlashcardsRepository
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            var connectionString = configuration.GetConnectionString("DBMain");
+            var connectionString = configuration.GetConnectionString("DBTest");
             optionsBuilder.UseSqlServer(connectionString);
 
             base.OnConfiguring(optionsBuilder);

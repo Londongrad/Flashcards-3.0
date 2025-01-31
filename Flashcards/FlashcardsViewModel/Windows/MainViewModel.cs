@@ -1,36 +1,44 @@
-﻿using FlashcardsLiblary.Repository;
+﻿using FlashcardsLiblary;
+using FlashcardsLiblary.Command;
+using FlashcardsLiblary.Repository;
 using FlashcardsLiblary.ViewModelBase;
+using FlashcardsViewModels.UserControls;
+using System.Collections.ObjectModel;
 
 namespace FlashcardsViewModels.Windows
 {
-    public delegate Task SetCommand(int num);
-    public class MainWindowViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase, INavigationService
     {
+        #region [ Fields ]
+        private readonly IRepository<Set> _setRepository;
+        private readonly INavigationService navigator;
+        private readonly CreateSetViewModel createSetVM;
+        private readonly SetsViewModel setsVM;
+        #endregion
+        public MainViewModel(IRepository<Set> setRepository)
+        {
+            _setRepository = setRepository;
+            navigator = this;
+            navigator.NavigateTo(createSetVM = new());
+            setsVM = new();
+            Sets = setRepository.GetAllAsync();
+            navigator.AddCreator(typeof(CreateSetViewModel), () => createSetVM);
+            navigator.AddCreator(typeof(SetsViewModel), () => setsVM);
+        }
 
-        //#region [ Fields ]
-        //private INavigationService? _navigation;
-        //private IWordRepository? _wordRepository;
-        //#endregion
+        #region [ Properties ]
+        public ReadOnlyObservableCollection<Set> Sets { get; }
+        #endregion
 
-        //public MainWindowViewModel(IRepository<Word> wordRepository)
-        //{
-        //    Navigation = navigationService;
-        //    _wordRepository = wordRepository;
-        //}
-
-        //#region [ Properties ]
-        //public INavigationService Navigation
-        //{
-        //    get => _navigation!;
-        //    private set
-        //    {
-        //        _navigation = value;
-        //        OnPropertyChanged();
-        //    }
-        //}
-        //#endregion
-
-        //#region [ Commands ]
+        #region [ Commands ]
+        public RelayCommand CreateSetCommand => GetCommand<CreateSetViewModel>
+            (
+                async setVM =>
+                {
+                    await _setRepository.AddAsync(new Set(setVM.Id, setVM.Name!));
+                },
+                setVM => !string.IsNullOrEmpty(setVM.Name)
+            );
         //public RelayCommand NavigateToCSViewCommand => new RelayCommand
         //    (
         //        execute => Navigation.NavigateTo(App.ServiceProvider!.GetRequiredService<CSViewModel>())
@@ -71,10 +79,15 @@ namespace FlashcardsViewModels.Windows
         //        //}
         //    }
         //    );
-        //#endregion
+        #endregion
 
-        //#region [ Methods ]
+        #region [ Methods ]
+        public void RaiseCurrentChanged() => RaisePropertyChanged(nameof(INavigationService.Current));
 
-        //#endregion
+        public async Task LoadAsync()
+        {
+            await _setRepository.LoadAsync();
+        }
+        #endregion
     }
 }

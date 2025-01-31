@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:view="clr-namespace:FlashcardsApp.UserControls"
+             xmlns:viewVM="clr-namespace:FlashcardsViewModels.UserControls;assembly=FlashcardsViewModels"
+             xmlns:rep="clr-namespace:FlashcardsLiblary.Repository;assembly=FlashcardsLiblary"
+             xmlns:local="clr-namespace:FlashcardsApp.UserControls"
              mc:Ignorable="d"
              d:DesignHeight="500"
              d:DesignWidth="800">
@@ -14,11 +16,21 @@
 
         <StackPanel>
 
-            <ItemsControl ItemsSource="{Binding Sets}"
+            <ItemsControl ItemsSource="{Binding Sets,
+                                                Mode=OneWay,
+                                                Source={StaticResource mainVM}}"
                           Margin="10 20 20 0">
+
+                <d:ItemsControl.ItemsSource>
+                    <x:Array Type="rep:Set">
+                        <local:Set Name="0"/>
+                        <local:Set Name="1" />
+                    </x:Array>
+                </d:ItemsControl.ItemsSource>
+
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <view:SetView Margin="0 0 0 30" />
+                        <local:SetView Margin="0 0 0 30" />
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
                 <ItemsControl.ItemsPanel>
