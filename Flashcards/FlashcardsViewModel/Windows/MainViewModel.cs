@@ -11,23 +11,30 @@ namespace FlashcardsViewModels.Windows
     {
         #region [ Fields ]
         private readonly IRepository<Set> _setRepository;
+        private readonly IRepository<Word> _wordRepository;
         private readonly INavigationService navigator;
         private readonly CreateSetViewModel createSetVM;
         private readonly SetsViewModel setsVM;
+        private readonly SetViewModel setVM;
         #endregion
-        public MainViewModel(IRepository<Set> setRepository)
+        public MainViewModel(IRepository<Set> setRepository, IRepository<Word> wordRepository)
         {
             _setRepository = setRepository;
+            _wordRepository = wordRepository;
             navigator = this;
             navigator.NavigateTo(createSetVM = new());
             setsVM = new();
+            setVM = new();
             Sets = setRepository.GetAllAsync();
+            Words = wordRepository.GetAllAsync();
             navigator.AddCreator(typeof(CreateSetViewModel), () => createSetVM);
             navigator.AddCreator(typeof(SetsViewModel), () => setsVM);
+            navigator.AddCreator(typeof(SetViewModel), () => setVM);
         }
 
         #region [ Properties ]
         public ReadOnlyObservableCollection<Set> Sets { get; }
+        public ReadOnlyObservableCollection<Word> Words { get; }
         #endregion
 
         #region [ Commands ]
@@ -38,6 +45,13 @@ namespace FlashcardsViewModels.Windows
                     await _setRepository.AddAsync(new Set(setVM.Id, setVM.Name!));
                 },
                 setVM => !string.IsNullOrEmpty(setVM.Name)
+            );
+        public RelayCommand DeleteSetCommand => GetCommand<Set>
+            (
+                async set =>
+                {
+                    await _setRepository.DeleteAsync(set.Id);
+                }
             );
         //public RelayCommand NavigateToCSViewCommand => new RelayCommand
         //    (
@@ -87,6 +101,7 @@ namespace FlashcardsViewModels.Windows
         public async Task LoadAsync()
         {
             await _setRepository.LoadAsync();
+            await _wordRepository.LoadAsync();
         }
         #endregion
     }

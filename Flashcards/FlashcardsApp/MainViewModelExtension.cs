@@ -10,7 +10,7 @@ namespace FlashcardsApp
         public MainViewModelExtension() { }
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return new MainViewModel(new DbSetRepository());
+            return new MainViewModel(new DbSetRepository(), new DbWordRepository());
         }
     }
 }

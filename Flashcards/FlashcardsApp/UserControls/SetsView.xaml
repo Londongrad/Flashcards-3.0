@@ -6,6 +6,7 @@
              xmlns:viewVM="clr-namespace:FlashcardsViewModels.UserControls;assembly=FlashcardsViewModels"
              xmlns:rep="clr-namespace:FlashcardsLiblary.Repository;assembly=FlashcardsLiblary"
              xmlns:local="clr-namespace:FlashcardsApp.UserControls"
+             d:DataContext="{d:DesignInstance Type=viewVM:SetViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="500"
              d:DesignWidth="800">
@@ -23,16 +24,166 @@
 
                 <d:ItemsControl.ItemsSource>
                     <x:Array Type="rep:Set">
-                        <local:Set Name="0"/>
+                        <local:Set Name="0" />
                         <local:Set Name="1" />
                     </x:Array>
                 </d:ItemsControl.ItemsSource>
 
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <local:SetView Margin="0 0 0 30" />
+                    <DataTemplate DataType="{x:Type rep:Set}">
+
+                        <StackPanel Orientation="Horizontal"
+                                    Width="740"
+                                    Margin="0 0 0 50">
+
+                            <Button Style="{DynamicResource SetButton}"
+                                    Command="{Binding SelectSetCommand}"
+                                    Margin="0 0 20 0">
+
+                                <StackPanel>
+
+                                    <TextBlock Text="{Binding Name}"
+                                               HorizontalAlignment="Center"
+                                               Margin="0 0 0 10" />
+                                    <TextBlock Text="{Binding Words.Count,
+                                                              StringFormat='{}{0} words'}" />
+                                </StackPanel>
+
+                            </Button>
+
+                            <Grid>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="80" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="0"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center">
+
+                                    <TextBlock Style="{StaticResource TextBlock}"
+                                               Text="Hide Def"
+                                               Margin="0 0 5 0"
+                                               VerticalAlignment="Top"
+                                               HorizontalAlignment="Left"
+                                               FontSize="12" />
+
+                                    <CheckBox Style="{DynamicResource ToggleButton}"
+                                              VerticalAlignment="Top"
+                                              HorizontalAlignment="Center"
+                                              IsChecked="{Binding IsChecked}" />
+
+                                    <TextBlock Style="{StaticResource TextBlock}"
+                                               Text="Hide Word"
+                                               Margin="5 0 0 0"
+                                               VerticalAlignment="Top"
+                                               HorizontalAlignment="Right"
+                                               FontSize="12" />
+
+                                </StackPanel>
+
+                                <Button Style="{StaticResource CSButtons}"
+                                        Background="#FF483D8B"
+                                        HorizontalContentAlignment="Center"
+                                        Command="{Binding SelectFavWordsCommand}"
+                                        Grid.Row="1">
+
+                                    <StackPanel>
+
+                                        <TextBlock Style="{StaticResource TextBlock}"
+                                                   Text="Only favorite" />
+                                        <TextBlock Text="{Binding NumOfFavWords,
+                                                                  StringFormat='{}{0} words',
+                                                                  Mode=OneWay,
+                                                                  Source={StaticResource mainVM}}"
+                                                   Style="{StaticResource TextBlock}"/>
+
+                                    </StackPanel>
+                                </Button>
+
+                                <Button Style="{StaticResource CSButtons}"
+                                        BorderThickness="0"
+                                        Background="#FF483D8B"
+                                        Margin="0 5 0 0"
+                                        Command="{Binding DeleteAllFavoriteCommand}"
+                                        Grid.Row="2">
+
+                                    <TextBlock Text="Delete All Favorite Words"
+                                               Foreground="White"
+                                               FontSize="18"
+                                               TextWrapping="Wrap" />
+                                </Button>
+
+                                <Button Style="{StaticResource CSButtons}"
+                                        BorderThickness="0"
+                                        Background="#FF483D8B"
+                                        Margin="5 0 0 0"
+                                        Grid.Column="1"
+                                        Height="70"
+                                        Padding="4"
+                                        Grid.Row="1"
+                                        Command="{Binding AddToFavInRangeCommand}">
+
+
+                                    <TextBlock Style="{StaticResource TextBlock}"
+                                               Text="Add or delete favorite in range"
+                                               Width="125"
+                                               FontSize="18" />
+
+                                </Button>
+
+                                <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Top"
+                                            Grid.Column="1"
+                                            Grid.Row="2"
+                                            Margin="0 10 0 0">
+
+                                    <TextBox Text="{Binding RangeStart, 
+                                                            UpdateSourceTrigger=PropertyChanged}"
+                                             Background="Transparent"
+                                             Foreground="AliceBlue"
+                                             Height="30"
+                                             Width="50"
+                                             Margin="0 0 10 0"
+                                             FontSize="20"
+                                             BorderThickness="0.2" />
+
+                                    <TextBox Grid.Row="1"
+                                             Text="{Binding RangeEnd, 
+                                                            UpdateSourceTrigger=PropertyChanged}"
+                                             Height="30"
+                                             Width="50"
+                                             Background="Transparent"
+                                             Foreground="AliceBlue"
+                                             FontSize="20"
+                                             BorderThickness="0.2" />
+                                </StackPanel>
+
+                                <Button Style="{StaticResource DeleteButtonStyle}"
+                                        Command="{Binding DeleteSetCommand, 
+                                                          Mode=OneWay, 
+                                                          Source={StaticResource mainVM}}"
+                                        CommandParameter="{Binding}"
+                                        Grid.Column="2"
+                                        Grid.RowSpan="3">
+                                    <Image Source="/wwwroot/Images/file_basket_red.png" />
+                                </Button>
+                            </Grid>
+
+                        </StackPanel>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
+
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <VirtualizingStackPanel />

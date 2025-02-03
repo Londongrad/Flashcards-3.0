@@ -13,8 +13,9 @@
                 <ResourceDictionary Source="/wwwroot/Themes/CSButtonTheme.xaml" />
                 <ResourceDictionary Source="/wwwroot/Themes/SetButtonTheme.xaml" />
                 <ResourceDictionary Source="/wwwroot/Themes/ToggleButtonTheme.xaml" />
-                <ResourceDictionary Source="/wwwroot/Themes/TextBlockOnAddTheme.xaml" />
-                <ResourceDictionary Source="/wwwroot/Themes/TextBoxOnAddTheme.xaml" />
+                <ResourceDictionary Source="/wwwroot/Themes/TextBlockTheme.xaml" />
+                <ResourceDictionary Source="/wwwroot/Themes/TextBoxTheme.xaml" />
+                <ResourceDictionary Source="/wwwroot/Themes/DeleteButtonTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <local:MainViewModel x:Key="mainVM" />
@@ -26,15 +27,6 @@
             <DataTemplate DataType="{x:Type vm:SetsViewModel}">
                 <views:SetsView />
             </DataTemplate>
-
-            <DataTemplate DataType="{x:Type vm:SetViewModel}">
-                <views:SetView />
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type vm:SelectedSetViewModel}">
-                <views:SelectedSetView />
-            </DataTemplate>
-
 
         </ResourceDictionary>
     </Application.Resources>
