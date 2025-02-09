@@ -59,7 +59,6 @@
                     Content="Delete"
                     Padding="10"
                     Command="{Binding DeleteWordCommand}" />
-
         </Grid>
 
         <Ellipse Width="30"
@@ -86,7 +85,6 @@
                Source="{Binding Image}"
                Visibility="{Binding IsVisibleImage}"
                MaxHeight="450"
-               MaxWidth="800"/>
-
+               MaxWidth="800" />
     </StackPanel>
 </UserControl>

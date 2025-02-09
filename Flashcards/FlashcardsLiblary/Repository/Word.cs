@@ -1,7 +1,7 @@
 ﻿namespace FlashcardsLiblary.Repository
 {
     /// <summary>Иммутабельный класс для Word (Слово).</summary>
-    public class Word(int id, string name, string? definition, string? imagePath, bool isFavorite, bool isLastWord) : IdDto(id)
+    public class Word(int id, string name, string? definition, string? imagePath, bool isFavorite, bool isLastWord, int setId) : IdDto(id)
     {
         /// <summary>Слово</summary>
         public string Name { get; set; } = name;
@@ -19,9 +19,9 @@
         public bool IsLastWord { get; set; } = isLastWord;
 
         /// <summary>Внешний ключ</summary>
-        public int SetId { get; set; }
+        public int SetId { get; set; } = setId;
 
-        /// <summary>Сет, к которому относится слово</summary>
+        /// <summary>Навигационное свойство. Сет, к которому относится слово</summary>
         public Set? Set { get; set; }
     }
 }

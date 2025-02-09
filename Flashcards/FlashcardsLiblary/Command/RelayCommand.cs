@@ -52,7 +52,6 @@ namespace FlashcardsLiblary.Command
                 )
         { }
 
-
         private readonly Dispatcher dispatcher = Application.Current.Dispatcher;
 
         /// <summary>Метод, подымающий событие <see cref="CanExecuteChanged"/>.</summary>
@@ -63,6 +62,7 @@ namespace FlashcardsLiblary.Command
             else
                 dispatcher.BeginInvoke(Invalidate);
         }
+
         private void Invalidate()
             => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
 

@@ -6,6 +6,7 @@ namespace FlashcardsLiblary.SyncedList
     {
         ReaderWriterLock ReaderWriterLocker { get; }
     }
+
     public interface ISyncedList : IList
     {
         ReaderWriterLock ReaderWriterLocker { get; }

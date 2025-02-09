@@ -37,7 +37,7 @@
         <Setter Property="FocusVisualStyle"
                 Value="{StaticResource FocusVisual}" />
         <Setter Property="Background"
-                Value="Transparent" />
+                Value="#FF483D8B" />
         <Setter Property="BorderBrush"
                 Value="Transparent" />
         <Setter Property="Foreground"

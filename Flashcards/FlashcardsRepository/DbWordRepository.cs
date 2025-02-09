@@ -1,7 +1,6 @@
 ﻿using FlashcardsLiblary;
 using FlashcardsLiblary.Repository;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -12,6 +11,7 @@ namespace FlashcardsRepository
     public class DbWordRepository : IRepository<Word>
     {
         #region [ Fields ]
+
 #pragma warning disable IDE0052 // Удалить непрочитанные закрытые члены
         private readonly DbContext _context;
 #pragma warning restore IDE0052 // Удалить непрочитанные закрытые члены
@@ -19,7 +19,8 @@ namespace FlashcardsRepository
         private readonly DbSet<Word> _words;
         private static readonly ImmutableArray<Action<object, EventArgs>> allPropertiesChangedHandler;
         private static readonly PropertyChangedEventArgs args = new(string.Empty);
-        #endregion
+
+        #endregion [ Fields ]
 
         public DbWordRepository(DbContext context, Func<DbContext> contextCreator)
         {
@@ -28,15 +29,16 @@ namespace FlashcardsRepository
             _words = context.Set<Word>();
         }
 
-        public DbWordRepository(Func<DbContext> contextCreator) 
-            : this (contextCreator(), contextCreator)
+        public DbWordRepository(Func<DbContext> contextCreator)
+            : this(contextCreator(), contextCreator)
         { }
-        
-        public DbWordRepository() 
-            : this(() => new ApplicationDbContext()) 
+
+        public DbWordRepository()
+            : this(() => new ApplicationDbContext())
         { }
 
         #region [ Methods ]
+
         public async Task<Word> AddAsync(Word word) => await Task.Run(() =>
         {
             // Добавление сущности через другой, одноразовый контекст БД.
@@ -84,13 +86,14 @@ namespace FlashcardsRepository
             // Обновление сущности с уведомлением привязок через PropertyDescriptor об изменении Bird.IsActive.
             // Вариант показан, как альтернативная реализация.
             // В данной задаче, на практике, более лучшим вариантом будет замена сущности.
-            //EntityEntry<Set>? be = _sets.Local.FindEntry(set.Id);
+            //EntityEntry<Word>? be = _words.Local.FindEntry(word.Id);
             //be!.Reload();
-            //Set b = _sets.Find(set.Id) ?? throw new NullReferenceException();
-            //OnAllPropertiesChanged(b);
+            //Word w = _words.Find(word.Id) ?? throw new NullReferenceException();
+            //OnAllPropertiesChanged(w);
         });
 
         private ReadOnlyObservableCollection<Word>? wordsReadOnlyObservableCollection;
+
         public ReadOnlyObservableCollection<Word> GetAllAsync()
         {
             wordsReadOnlyObservableCollection ??= new(_words.Local.ToObservableCollection());
@@ -101,21 +104,23 @@ namespace FlashcardsRepository
         {
             var onValueChanged = typeof(PropertyDescriptor)
                 .GetMethod($"OnValueChanged", BindingFlags.Instance | BindingFlags.NonPublic)!;
-            allPropertiesChangedHandler = TypeDescriptor.GetProperties(typeof(Set))
+            allPropertiesChangedHandler = TypeDescriptor.GetProperties(typeof(Word))
                 .Cast<PropertyDescriptor>()
                 .Select(pr => onValueChanged.CreateDelegate<Action<object, EventArgs>>(pr))
                 .ToImmutableArray();
         }
 
         // Метод обновляющий все привязки к Set.
-        //private static void OnAllPropertiesChanged(Set s)
-        //{
-        //    foreach (var p in allPropertiesChangedHandler)
-        //    {
-        //        p(s, args);
-        //    }
-        //}
+        private static void OnAllPropertiesChanged(Word s)
+        {
+            foreach (var p in allPropertiesChangedHandler)
+            {
+                p(s, args);
+            }
+        }
+
         public async Task LoadAsync() => await Task.Run(_words.Load);
-        #endregion
+
+        #endregion [ Methods ]
     }
 }

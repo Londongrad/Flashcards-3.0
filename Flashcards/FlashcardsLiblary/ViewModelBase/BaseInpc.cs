@@ -11,7 +11,7 @@ namespace FlashcardsLiblary.ViewModelBase
         public event PropertyChangedEventHandler? PropertyChanged;
 
         /// <summary>Защищённый метод для создания события <see cref="PropertyChanged"/>.</summary>
-        /// <param name="propertyName">Имя изменившегося свойства. 
+        /// <param name="propertyName">Имя изменившегося свойства.
         /// Если значение не задано, то используется имя метода в котором был вызов.</param>
         protected void RaisePropertyChanged([CallerMemberName] string? propertyName = null)
         {
@@ -23,7 +23,7 @@ namespace FlashcardsLiblary.ViewModelBase
         /// <typeparam name="T">Тип поля и присваиваемого значения.</typeparam>
         /// <param name="propertyFiled">Ссылка на поле.</param>
         /// <param name="newValue">Присваиваемое значение.</param>
-        /// <param name="propertyName">Имя изменившегося свойства. 
+        /// <param name="propertyName">Имя изменившегося свойства.
         /// Если значение не задано, то используется имя метода в котором был вызов.</param>
         /// <remarks>Метод предназначен для использования в сеттере свойства.<br/>
         /// Для проверки на изменение используется метод <see cref="object.Equals(object, object)"/>.
@@ -54,7 +54,7 @@ namespace FlashcardsLiblary.ViewModelBase
         /// реакции на изменение значения свойства.<br/>
         /// Рекомендуется в переопределённом методе первым оператором вызывать базовый метод.<br/>
         /// Если в переопределённом методе не будет вызова базового, то возможно нежелательное изменение логики базового класса.</remarks>
-        protected virtual void OnPropertyChanged(string propertyName, object? oldValue, object? newValue) { }
+        protected virtual void OnPropertyChanged(string propertyName, object? oldValue, object? newValue)
+        { }
     }
-
 }

@@ -3,11 +3,13 @@ namespace FlashcardsLiblary.Command
 {
     /// <summary>Делегат исполняющего метода команды без параметра.</summary>
     public delegate void ExecuteHandler();
+
     /// <summary>Делегат метода возвращающего состояние команды без параметра.</summary>
     public delegate bool CanExecuteHandler();
 
     /// <summary>Делегат исполняющего метода команды с параметром.</summary>
     public delegate void ExecuteHandler<T>(T parameter);
+
     /// <summary>Делегат метода возвращающего состояние команды с параметром.</summary>
     public delegate bool CanExecuteHandler<T>(T parameter);
 

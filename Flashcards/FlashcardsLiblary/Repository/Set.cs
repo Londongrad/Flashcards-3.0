@@ -1,12 +1,12 @@
 ﻿namespace FlashcardsLiblary.Repository
 {
-    /// <summary>Иммутабельный класс для Set (Набор).</summary>
+    /// <summary>Immutable class for a set.</summary>
     public class Set(int id, string name) : IdDto(id)
     {
-        /// <summary>Название сета</summary>
+        /// <summary>Set's name</summary>
         public string Name { get; set; } = name;
 
-        /// <summary>Слова, относящиеся к сету</summary>
+        /// <summary>Words in this set</summary>
         public List<Word>? Words { get; set; }
     }
 }

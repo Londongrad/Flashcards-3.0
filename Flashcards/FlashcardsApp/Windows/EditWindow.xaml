@@ -42,7 +42,7 @@
                      MinWidth="90"
                      Margin="0 40 0 20"
                      BorderThickness="0.6"
-                     BorderBrush="Black"/>
+                     BorderBrush="Black" />
 
             <Image x:Name="Image"
                    Source="{Binding ImagePath}"
@@ -76,7 +76,6 @@
                         Command="{Binding ChangeImageCommand}"
                         HorizontalAlignment="Center">
                 </Button>
-
             </StackPanel>
         </StackPanel>
     </Border>

@@ -11,8 +11,8 @@ namespace FlashcardsLiblary.Command
                 command.Execute(parameter);
             return can;
         }
+
         public static bool TryExecute(this ICommand command)
           => command.TryExecute(null);
     }
-
 }

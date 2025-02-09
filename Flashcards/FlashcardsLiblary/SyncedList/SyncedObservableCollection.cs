@@ -8,8 +8,10 @@ namespace FlashcardsLiblary.SyncedList
     public class SyncedObservableCollection<T> : ObservableCollection<T>, IEnumerable, ICollection, IList, IReadOnlyCollection<T>, IReadOnlyList<T>, IEnumerable<T>, ICollection<T>, IList<T>, ISyncedList, ISyncedList<T>
     {
         public ReaderWriterLock ReaderWriterLocker { get; }
+
         private static readonly FieldInfo listField = typeof(Collection<T>).GetField("items", BindingFlags.Instance | BindingFlags.NonPublic)
             ?? throw new NotImplementedException("Поле list в Collection<T> не реализовано.");
+
         private readonly SyncedList<T> list;
 
         public SyncedObservableCollection()
@@ -119,7 +121,5 @@ namespace FlashcardsLiblary.SyncedList
 
         //    set => base[index] = value;
         //}
-
-
     }
 }

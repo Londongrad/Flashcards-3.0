@@ -110,22 +110,18 @@ namespace FlashcardsLiblary.ViewModelBase
                     command = canExecute == null
                         ? new RelayCommand(executeV)
                         : new RelayCommand(executeV, (CanExecuteHandler)canExecute);
-
                 }
 
                 commands.Add(commandName, command);
             }
 
             return command;
-
         }
-
 
         /// <summary>Удаляет команду.</summary>
         /// <param name="commandName">Имя команды.</param>
         /// <returns><see langword="true"/>, если команда удалена.</returns>
         protected bool RemoveCommnad(string commandName) => commands.Remove(commandName);
-
 
         protected static readonly ArgumentException executeException = new("null не разрешён", "execute");
         protected static readonly ArgumentException canExecuteException = new("null не разрешён", "canExecute");

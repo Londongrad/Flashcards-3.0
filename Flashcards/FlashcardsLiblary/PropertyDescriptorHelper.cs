@@ -21,6 +21,7 @@ namespace FlashcardsLiblary
         {
             GetProperties(target.GetType())[propertyName].SetValue(target, value);
         }
+
         public static void SetValue<T>(this T target, PropertyDescriptor propertyDescriptor, object value)
             where T : class
         {
@@ -32,6 +33,7 @@ namespace FlashcardsLiblary
         {
             return GetProperties(target.GetType())[propertyName].GetValue(target);
         }
+
         public static object GetValue<T>(this T target, PropertyDescriptor propertyDescriptor)
             where T : class
         {
@@ -43,6 +45,7 @@ namespace FlashcardsLiblary
         {
             new target_handler(target, propertyDescriptor, handler);
         }
+
         private static readonly Func<PropertyDescriptor, object, EventHandler> GetHandlerList =
             (Func<PropertyDescriptor, object, EventHandler>)
             typeof(PropertyDescriptor)
@@ -52,7 +55,6 @@ namespace FlashcardsLiblary
         public static void RemoveValueChanged<T>(this T target, PropertyDescriptor propertyDescriptor, PropertyChangedEventHandler handler)
             where T : class
         {
-
             var list = GetHandlerList(propertyDescriptor, target);
             foreach (var item in list.GetInvocationList().Cast<EventHandler>().ToArray())
             {

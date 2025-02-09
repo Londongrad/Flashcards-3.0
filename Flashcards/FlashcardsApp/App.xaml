@@ -27,7 +27,6 @@
             <DataTemplate DataType="{x:Type vm:SetsViewModel}">
                 <views:SetsView />
             </DataTemplate>
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>

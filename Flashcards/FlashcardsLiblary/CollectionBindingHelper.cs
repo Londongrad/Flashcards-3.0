@@ -1,5 +1,4 @@
-﻿using FlashcardsLiblary;
-using FlashcardsLiblary.SyncedList;
+﻿using FlashcardsLiblary.SyncedList;
 using System.Collections;
 using System.Windows;
 using System.Windows.Data;
@@ -52,8 +51,10 @@ namespace FlashcardsLiblary
                 Application.Current.Dispatcher.Invoke(collection.DisableCollectionSynchronization);
             }
         }
+
         public static void EnableCollectionSynchronization<T>(this ISyncedList collection)
             => collection.EnableCollectionSynchronization(TimeSpan.FromSeconds(1));
+
         public static void EnableCollectionSynchronization(this ISyncedList syncCollection, TimeSpan timeout)
         {
             if (syncCollection is null)
@@ -75,6 +76,7 @@ namespace FlashcardsLiblary
                 CollectionSynchronization(syncCollection, timeout, accessMethod, writeAccess);
             }
         }
+
         public static void CollectionSynchronization(ISyncedList syncCollection, TimeSpan timeout, Action accessMethod, bool writeAccess)
         {
             if (writeAccess)
@@ -91,5 +93,4 @@ namespace FlashcardsLiblary
             }
         }
     }
-
 }

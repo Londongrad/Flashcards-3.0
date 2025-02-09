@@ -30,7 +30,9 @@
 
         private class MemberwiseCloneHandler
         {
-            private MemberwiseCloneHandler() { }
+            private MemberwiseCloneHandler()
+            { }
+
             public static readonly Func<object, object> memberwiseClone
                 = (Func<object, object>)((Func<object>)new MemberwiseCloneHandler().MemberwiseClone)
                     .Method.CreateDelegate(typeof(Func<object, object>));

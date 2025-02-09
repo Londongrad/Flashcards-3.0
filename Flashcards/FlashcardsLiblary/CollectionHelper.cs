@@ -51,13 +51,11 @@ namespace FlashcardsLiblary
         public static void Initial<T>(this ICollection<T> collection, params T[] source)
             => collection.Initial((IEnumerable<T>)source);
 
-
         private static void PrivateInitial<T>(this ICollection<T> collection, IEnumerable<T> source)
         {
             collection.Clear();
             collection.PrivateAddRange(source);
         }
-
 
         /// <summary>Инициализирует коллекцию <paramref name="collection"/> элементами последовательности <paramref name="source"/>.</summary>
         /// <typeparam name="T">Тип элемента коллекции.</typeparam>
@@ -80,7 +78,6 @@ namespace FlashcardsLiblary
             }
         }
 
-
         /// <inheritdoc cref="InitialByReplace{T}(IList{T}, IEnumerable{T})"/>
         public static void InitialByReplace<T>(this IList<T> list, params T[] source)
             => list.InitialByReplace((IEnumerable<T>)source);
@@ -102,7 +99,6 @@ namespace FlashcardsLiblary
             }
         }
 
-
         /// <summary>Метод заменяющий элемент в индексированной коллекции.</summary>
         /// <typeparam name="T">Тип элемента коллекции.</typeparam>
         /// <param name="list">Индексированная коллекция.</param>
@@ -121,6 +117,7 @@ namespace FlashcardsLiblary
                 return list.PrivateReplace(predicate, newItem);
             }
         }
+
         private static bool PrivateReplace<T>(this IList<T> list, Predicate<T> predicate, T newItem)
         {
             for (int i = 0; i < list.Count; i++)
@@ -153,6 +150,7 @@ namespace FlashcardsLiblary
                 return list.PrivateReplaceOrAdd(predicate, newItem);
             }
         }
+
         private static bool PrivateReplaceOrAdd<T>(this IList<T> list, Predicate<T> predicate, T newItem)
         {
             if (list.PrivateReplace(predicate, newItem))
@@ -182,6 +180,7 @@ namespace FlashcardsLiblary
                 return list.PrivateIndexOf(index, count, predicate);
             }
         }
+
         /// <inheritdoc cref="IndexOf{T}(IList{T}, int, int, Predicate{T})"/>
         public static int IndexOf<T>(this IList<T> list, int index, Predicate<T> predicate)
             => list.IndexOf(index, list.Count - index, predicate);
@@ -238,6 +237,7 @@ namespace FlashcardsLiblary
                 return list.PrivateRemoveFirst(predicate);
             }
         }
+
         private static bool PrivateRemoveFirst<T>(this IList<T> list, Predicate<T> predicate)
         {
             for (int i = 0; i < list.Count; i++)
@@ -268,6 +268,7 @@ namespace FlashcardsLiblary
                 return list.PrivateRemoveAll(predicate);
             }
         }
+
         private static int PrivateRemoveAll<T>(this IList<T> list, Predicate<T> predicate)
         {
             if (list is List<T> _list)
@@ -288,5 +289,4 @@ namespace FlashcardsLiblary
             return count;
         }
     }
-
 }

@@ -11,15 +11,19 @@ namespace FlashcardsRepository
     public class DbSetRepository : IRepository<Set>
     {
         #region [ Fields ]
+
 #pragma warning disable IDE0052 // Удалить непрочитанные закрытые члены
         private readonly DbContext _context;
 #pragma warning restore IDE0052 // Удалить непрочитанные закрытые члены
         private readonly Func<DbContext> _contextCreator;
         private readonly DbSet<Set> _sets;
+
         // Создание метода для уведомления об обновлении всех свойств Set
         private static readonly ImmutableArray<Action<object, EventArgs>> allPropertiesChangedHandler;
+
         private static readonly PropertyChangedEventArgs args = new(string.Empty);
-        #endregion
+
+        #endregion [ Fields ]
 
         public DbSetRepository(DbContext context, Func<DbContext> contextCreator)
         {
@@ -37,6 +41,7 @@ namespace FlashcardsRepository
         { }
 
         #region [ Methods ]
+
         public async Task<Set> AddAsync(Set set) => await Task.Run(() =>
         {
             // Добавление сущности через другой, одноразовый контекст БД.
@@ -91,6 +96,7 @@ namespace FlashcardsRepository
         });
 
         private ReadOnlyObservableCollection<Set>? setsReadOnlyObservableCollection;
+
         public ReadOnlyObservableCollection<Set> GetAllAsync()
         {
             setsReadOnlyObservableCollection ??= new(_sets.Local.ToObservableCollection());
@@ -108,14 +114,16 @@ namespace FlashcardsRepository
         }
 
         // Метод обновляющий все привязки к Set.
-        //private static void OnAllPropertiesChanged(Set s)
-        //{
-        //    foreach (var p in allPropertiesChangedHandler)
-        //    {
-        //        p(s, args);
-        //    }
-        //}
+        private static void OnAllPropertiesChanged(Set s)
+        {
+            foreach (var p in allPropertiesChangedHandler)
+            {
+                p(s, args);
+            }
+        }
+
         public async Task LoadAsync() => await Task.Run(_sets.Load);
-        #endregion
+
+        #endregion [ Methods ]
     }
 }

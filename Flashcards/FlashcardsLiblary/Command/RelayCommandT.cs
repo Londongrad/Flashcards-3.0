@@ -49,7 +49,6 @@
             )
         { }
 
-
         private static ExecuteHandler<object>? Convert(ExecuteHandler<T> execute, ConverterFromObjectHandler<T> converter)
         {
             if (execute is null) return null;
@@ -63,6 +62,7 @@
                 }
             };
         }
+
         private static ExecuteHandler<object>? Convert(ExecuteHandler<T> execute)
         {
             if (execute is null) return null;
@@ -76,7 +76,6 @@
             };
         }
 
-
         private static CanExecuteHandler<object>? Convert(CanExecuteHandler<T> canExecute, ConverterFromObjectHandler<T> converter)
         {
             if (canExecute is null) return null;
@@ -84,8 +83,8 @@
 
             return p => (p is T t || converter(p, out t)) &&
                         canExecute(t);
-
         }
+
         private static CanExecuteHandler<object>? Convert(CanExecuteHandler<T> canExecute)
         {
             if (canExecute is null) return null;
@@ -93,6 +92,5 @@
             return p => p is T t &&
                         canExecute(t);
         }
-
     }
 }

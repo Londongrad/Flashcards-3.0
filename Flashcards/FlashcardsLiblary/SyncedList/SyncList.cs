@@ -4,7 +4,6 @@ namespace FlashcardsLiblary.SyncedList
 {
     public partial class SyncedList<T> : IEnumerable, ICollection, IList, IReadOnlyCollection<T>, IReadOnlyList<T>, IEnumerable<T>, ICollection<T>, IList<T>, ISyncedList, ISyncedList<T>
     {
-
         private readonly IList<T> privateList;
 
         public SyncedList()
@@ -13,8 +12,10 @@ namespace FlashcardsLiblary.SyncedList
 
         public SyncedList(ReaderWriterLock readerWriterLocker) : this([], readerWriterLocker)
         { }
+
         public SyncedList(IList<T> list) : this(list, new ReaderWriterLock())
         { }
+
         public SyncedList(IList<T> list, ReaderWriterLock readerWriterLocker)
         {
             ArgumentNullException.ThrowIfNull(list);

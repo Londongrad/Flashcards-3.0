@@ -1,5 +1,4 @@
 ﻿using FlashcardsLiblary.ViewModelBase;
-using System.Collections.ObjectModel;
 
 namespace FlashcardsViewModels.UserControls
 {

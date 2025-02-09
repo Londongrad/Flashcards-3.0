@@ -10,13 +10,16 @@ namespace FlashcardsViewModels.Windows
     public class MainViewModel : ViewModelBase, INavigationService
     {
         #region [ Fields ]
+
         private readonly IRepository<Set> _setRepository;
         private readonly IRepository<Word> _wordRepository;
         private readonly INavigationService navigator;
         private readonly CreateSetViewModel createSetVM;
         private readonly SetsViewModel setsVM;
         private readonly SetViewModel setVM;
-        #endregion
+
+        #endregion [ Fields ]
+
         public MainViewModel(IRepository<Set> setRepository, IRepository<Word> wordRepository)
         {
             _setRepository = setRepository;
@@ -33,19 +36,41 @@ namespace FlashcardsViewModels.Windows
         }
 
         #region [ Properties ]
+
         public ReadOnlyObservableCollection<Set> Sets { get; }
         public ReadOnlyObservableCollection<Word> Words { get; }
-        #endregion
+
+        #endregion [ Properties ]
 
         #region [ Commands ]
+
         public RelayCommand CreateSetCommand => GetCommand<CreateSetViewModel>
             (
                 async setVM =>
                 {
-                    await _setRepository.AddAsync(new Set(setVM.Id, setVM.Name!));
+                    await _setRepository.AddAsync(new Set(setVM.Id, setVM.Set!));
                 },
-                setVM => !string.IsNullOrEmpty(setVM.Name)
+                setVM => !string.IsNullOrEmpty(setVM.Set)
             );
+
+        public RelayCommand SaveWordCommand => GetCommand<CreateSetViewModel>
+            (
+                async setVM =>
+                {
+                    var set = Sets.FirstOrDefault(s => s.Name == setVM.Set) ?? await _setRepository.AddAsync(new Set(setVM.Id, setVM.Set));
+                    await _wordRepository.AddAsync(new Word(
+                        setVM.Id,
+                        setVM.Word!,
+                        setVM.Definition,
+                        setVM.ImagePath,
+                        false,
+                        false,
+                        set.Id
+                        ));
+                },
+                setVM => !string.IsNullOrEmpty(setVM.Set) && !string.IsNullOrEmpty(setVM.Word)
+            );
+
         public RelayCommand DeleteSetCommand => GetCommand<Set>
             (
                 async set =>
@@ -53,6 +78,7 @@ namespace FlashcardsViewModels.Windows
                     await _setRepository.DeleteAsync(set.Id);
                 }
             );
+
         //public RelayCommand NavigateToCSViewCommand => new RelayCommand
         //    (
         //        execute => Navigation.NavigateTo(App.ServiceProvider!.GetRequiredService<CSViewModel>())
@@ -93,16 +119,23 @@ namespace FlashcardsViewModels.Windows
         //        //}
         //    }
         //    );
-        #endregion
+
+        #endregion [ Commands ]
 
         #region [ Methods ]
+
         public void RaiseCurrentChanged() => RaisePropertyChanged(nameof(INavigationService.Current));
 
         public async Task LoadAsync()
         {
             await _setRepository.LoadAsync();
             await _wordRepository.LoadAsync();
+            foreach (var set in Sets)
+            {
+                set.Words = Words.Where(w => w.SetId == set.Id).ToList();
+            }
         }
-        #endregion
+
+        #endregion [ Methods ]
     }
 }

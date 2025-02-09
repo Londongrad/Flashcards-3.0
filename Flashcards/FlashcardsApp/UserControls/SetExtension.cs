@@ -10,6 +10,7 @@ namespace FlashcardsApp.UserControls
 
         /// <summary>Имя.</summary>
         public string Name { get; set; }
+
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             return new Set(Id, Name);

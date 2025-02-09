@@ -38,7 +38,8 @@ namespace FlashcardsLiblary.ViewModelBase
 
         /// <summary>Конструктор со значением свойств <see cref="Dispatcher"/>
         /// и <see cref="IsInDesignMode"/> заданными при инициализации.</summary>
-        protected ViewModelBase() { }
+        protected ViewModelBase()
+        { }
 
         /// <summary>Конструктор со значением свойства
         /// <see cref="IsInDesignMode"/> заданным при инициализации.</summary>

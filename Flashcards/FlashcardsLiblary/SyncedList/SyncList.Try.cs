@@ -4,8 +4,6 @@ namespace FlashcardsLiblary.SyncedList
 {
     public partial class SyncedList<T> : IEnumerable, ICollection, IList, IReadOnlyCollection<T>, IReadOnlyList<T>, IEnumerable<T>, ICollection<T>, IList<T>, ISyncedList, ISyncedList<T>
     {
-
-
         public bool TryGetValue(int index, out T? value, TimeSpan timeout)
         {
             try
@@ -20,7 +18,6 @@ namespace FlashcardsLiblary.SyncedList
                 value = default;
                 return false;
             }
-
         }
 
         public bool TrySetValue(int index, T value, TimeSpan timeout)
@@ -36,7 +33,6 @@ namespace FlashcardsLiblary.SyncedList
             {
                 return false;
             }
-
         }
 
         public bool TryCount(out int count, TimeSpan timeout)
@@ -53,7 +49,6 @@ namespace FlashcardsLiblary.SyncedList
                 count = -1;
                 return false;
             }
-
         }
 
         public bool TryAdd(T value, TimeSpan timeout)
@@ -84,9 +79,7 @@ namespace FlashcardsLiblary.SyncedList
             {
                 return false;
             }
-
         }
-
 
         public bool TryContains(T item, out bool contains, TimeSpan timeout)
         {
@@ -102,7 +95,6 @@ namespace FlashcardsLiblary.SyncedList
                 contains = false;
                 return false;
             }
-
         }
 
         public bool TryCopyTo(T[] array, int arrayIndex, TimeSpan timeout)
@@ -118,9 +110,7 @@ namespace FlashcardsLiblary.SyncedList
             {
                 return false;
             }
-
         }
-
 
         public bool TryIndexOf(T item, out int index, TimeSpan timeout)
         {
@@ -136,7 +126,6 @@ namespace FlashcardsLiblary.SyncedList
                 index = -1;
                 return false;
             }
-
         }
 
         public bool TryInsert(int index, T item, TimeSpan timeout)
@@ -152,7 +141,6 @@ namespace FlashcardsLiblary.SyncedList
             {
                 return false;
             }
-
         }
 
         public bool TryRemove(T item, out bool isRemove, TimeSpan timeout)
@@ -169,8 +157,8 @@ namespace FlashcardsLiblary.SyncedList
                 isRemove = false;
                 return false;
             }
-
         }
+
         public bool TryRemoveAt(int index, TimeSpan timeout)
         {
             try
@@ -184,7 +172,6 @@ namespace FlashcardsLiblary.SyncedList
             {
                 return false;
             }
-
         }
     }
 }

@@ -82,7 +82,6 @@
                                     </Style>
                                 </Ellipse.Style>
                             </Ellipse>
-
                         </Grid>
                         <ContentPresenter x:Name="contentPresenter"
                                           ContentTemplate="{TemplateBinding ContentTemplate}"

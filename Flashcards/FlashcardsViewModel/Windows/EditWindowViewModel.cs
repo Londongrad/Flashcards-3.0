@@ -1,7 +1,4 @@
-﻿using FlashcardsLiblary.Repository;
-using FlashcardsLiblary.ViewModelBase;
-using Microsoft.Win32;
-using System.Windows;
+﻿using FlashcardsLiblary.ViewModelBase;
 
 namespace FlashcardsViewModels.Windows
 {

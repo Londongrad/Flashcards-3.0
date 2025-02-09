@@ -20,21 +20,19 @@
                     Margin="160 0 0 30">
 
             <TextBox Style="{StaticResource TextBox}"
-                     Text="{Binding Name, 
-                                    UpdateSourceTrigger=PropertyChanged}" 
-                     MaxLength="2"/>
+                     Text="{Binding Set,
+                                    UpdateSourceTrigger=PropertyChanged}"
+                     MaxLength="2" />
 
-            <Button Command="{Binding CreateSetCommand, 
-                                      Mode=OneWay, 
+            <Button Command="{Binding CreateSetCommand,
+                                      Mode=OneWay,
                                       Source={StaticResource mainVM}}"
                     CommandParameter="{Binding}"
                     Content="Create only set"
                     Style="{StaticResource CSButtons}"
                     Margin="20 0 0 0">
-
             </Button>
         </StackPanel>
-
 
         <TextBlock Text="Word"
                    Style="{StaticResource TextBlock}" />
@@ -44,14 +42,13 @@
                     Margin="45 0 0 30">
 
             <TextBox Style="{StaticResource TextBox}"
-                     Text="{Binding WordName, 
+                     Text="{Binding Word,
                                     UpdateSourceTrigger=PropertyChanged}" />
 
             <Image Source="/wwwroot/Images/ex.png"
                    Height="40"
                    Width="40"
                    Visibility="{Binding ExVis}" />
-
         </StackPanel>
 
         <TextBlock Text="Definition"
@@ -59,7 +56,7 @@
 
         <TextBox Style="{StaticResource TextBox}"
                  Text="{Binding Definition}"
-                 Margin="0 0 0 30"/>
+                 Margin="0 0 0 30" />
 
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center"
@@ -67,7 +64,7 @@
 
             <Button Style="{StaticResource CSButtons}"
                     Content="Path to the Image"
-                    Command="{Binding FindImageCommand}"/>
+                    Command="{Binding FindImageCommand}" />
 
             <Image Source="/wwwroot/Images/ok.png"
                    Height="50"
@@ -76,8 +73,11 @@
         </StackPanel>
 
         <Button Content="Save the word"
-                Command="{Binding AddWordCommand}"
-                Style="{StaticResource CSButtons}" 
-                Width="1"/>
+                Command="{Binding SaveWordCommand,
+                                  Mode=OneWay,
+                                  Source={StaticResource mainVM}}"
+                Style="{StaticResource CSButtons}"
+                CommandParameter="{Binding}"
+                Width="1" />
     </StackPanel>
 </UserControl>

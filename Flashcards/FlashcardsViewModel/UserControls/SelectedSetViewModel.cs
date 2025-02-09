@@ -1,7 +1,4 @@
 ﻿using FlashcardsLiblary.ViewModelBase;
-using System.Collections.ObjectModel;
-using System.Speech.Synthesis;
-using System.Windows;
 
 namespace FlashcardsViewModels.UserControls
 {
