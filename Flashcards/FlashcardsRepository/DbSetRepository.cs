@@ -1,6 +1,6 @@
-﻿using FlashcardsLiblary;
-using FlashcardsLiblary.Repository;
+﻿using FlashcardsLiblary.Repository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -27,6 +27,7 @@ namespace FlashcardsRepository
 
         public DbSetRepository(DbContext context, Func<DbContext> contextCreator)
         {
+            context.Database.EnsureCreated();
             _contextCreator = contextCreator;
             _context = _contextCreator();
             _sets = context.Set<Set>();
@@ -83,16 +84,16 @@ namespace FlashcardsRepository
                 _ = context.SaveChanges();
             }
             // Замена сущности в локальном кеше.
-            _sets.Local.ToObservableCollection().ReplaceOrAdd(s => s.Id == set.Id, set);
-            _sets.Local.FindEntry(set.Id)!.State = EntityState.Unchanged;
+            //_sets.Local.ToObservableCollection().ReplaceOrAdd(s => s.Id == set.Id, set);
+            //_sets.Local.FindEntry(set.Id)!.State = EntityState.Unchanged;
 
             // Обновление сущности с уведомлением привязок через PropertyDescriptor об изменении Bird.IsActive.
             // Вариант показан, как альтернативная реализация.
             // В данной задаче, на практике, более лучшим вариантом будет замена сущности.
-            //EntityEntry<Set>? be = _sets.Local.FindEntry(set.Id);
-            //be!.Reload();
-            //Set b = _sets.Find(set.Id) ?? throw new NullReferenceException();
-            //OnAllPropertiesChanged(b);
+            EntityEntry<Set>? be = _sets.Local.FindEntry(set.Id);
+            be!.Reload();
+            Set b = _sets.Find(set.Id) ?? throw new NullReferenceException();
+            OnAllPropertiesChanged(b);
         });
 
         private ReadOnlyObservableCollection<Set>? setsReadOnlyObservableCollection;

@@ -1,6 +1,7 @@
 ﻿using FlashcardsLiblary.Repository;
 using FlashcardsRepository.Configurations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 
@@ -13,13 +14,15 @@ namespace FlashcardsRepository
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
+            //var configuration = new ConfigurationBuilder()
+            //    .SetBasePath(Directory.GetCurrentDirectory())
+            //    .AddJsonFile("appsettings.json")
+            //    .Build();
 
-            var connectionString = configuration.GetConnectionString("DBTest");
-            optionsBuilder.UseSqlServer(connectionString);
+            //var connectionString = configuration.GetConnectionString("DBTest");
+            
+            optionsBuilder
+                .UseSqlite($"Data Source=flashcards.db");
 
             base.OnConfiguring(optionsBuilder);
         }
