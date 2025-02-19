@@ -1,7 +1,7 @@
 ﻿using FlashcardsLiblary.Repository;
 using System.Windows.Markup;
 
-namespace FlashcardsViewModels.UserControls
+namespace FlashcardsViewModels.UserControls.UUFYC
 {
     public class SetExtension : MarkupExtension
     {
@@ -9,7 +9,7 @@ namespace FlashcardsViewModels.UserControls
         public int Id { get; set; }
 
         /// <summary>Имя.</summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {

@@ -1,4 +1,5 @@
-﻿using FlashcardsRepository;
+﻿using FlashcardsLiblary.Repository;
+using FlashcardsRepository;
 using FlashcardsViewModels.Windows;
 using System.Windows.Markup;
 
@@ -12,7 +13,7 @@ namespace FlashcardsApp
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
-            return new MainViewModel(new DbSetRepository(), new DbWordRepository());
+            return new MainViewModel(new DbModel(new ApplicationDbContext(), () => new ApplicationDbContext()));
         }
     }
 }

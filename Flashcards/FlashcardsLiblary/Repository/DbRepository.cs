@@ -16,7 +16,7 @@ namespace FlashcardsLiblary.Repository
 
         /// <summary>Конструктор Репозитория.</summary>
         /// <param name="context">Постоянный Контекст БД, используемый для синхронизации через локальный кеш.</param>
-        /// <param name="contextCreator">Функция, создающая новый одноразовый DbContext, 
+        /// <param name="contextCreator">Функция, создающая новый одноразовый DbContext,
         /// из которого можно получить <see cref="DbSet{TEntity}">DbSet&lt;<typeparamref name="TId"/>&gt;</see>.</param>
         public DbRepository(DbContext context, Func<DbContext> contextCreator)
         {
@@ -66,6 +66,7 @@ namespace FlashcardsLiblary.Repository
         });
 
         private ReadOnlyObservableCollection<TId>? birdsReadOnlyObservableCollection;
+
         public ReadOnlyObservableCollection<TId> GetObservableCollection()
         {
             birdsReadOnlyObservableCollection ??= new(dbSet.Local.ToObservableCollection());
@@ -93,11 +94,11 @@ namespace FlashcardsLiblary.Repository
             OnAllPropertiesChanged(tid);
         });
 
-
         private static readonly PropertyChangedEventArgs args = new(string.Empty);
 
         // Создание метода для уведомления об обновлении всех свойств Bird
         private static readonly ImmutableArray<Action<object, EventArgs>> allPropertiesChangedHandler;
+
         static DbRepository()
         {
             var onValueChanged = typeof(PropertyDescriptor)
@@ -116,6 +117,7 @@ namespace FlashcardsLiblary.Repository
                 p(ent, args);
             }
         }
+
         public async Task LoadAsync() => await Task.Run(dbSet.Load);
     }
 }

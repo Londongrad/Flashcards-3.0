@@ -1,9 +1,9 @@
 ﻿<Application x:Class="FlashcardsApp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:vm="clr-namespace:FlashcardsViewModels.UserControls;assembly=FlashcardsViewModels"
-             xmlns:views="clr-namespace:FlashcardsApp.UserControls"
              xmlns:local="clr-namespace:FlashcardsApp"
+             xmlns:views="clr-namespace:FlashcardsApp.UserControls"
+             xmlns:vm="clr-namespace:FlashcardsViewModels.UserControls;assembly=FlashcardsViewModels"
              Startup="OnStartup"
              ShutdownMode="OnMainWindowClose">
     <Application.Resources>

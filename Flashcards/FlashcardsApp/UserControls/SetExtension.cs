@@ -9,7 +9,7 @@ namespace FlashcardsApp.UserControls
         public int Id { get; set; }
 
         /// <summary>Имя.</summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {

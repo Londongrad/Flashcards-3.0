@@ -1,5 +1,4 @@
 ﻿using FlashcardsLiblary;
-using FlashcardsLiblary.Command;
 using FlashcardsLiblary.Repository;
 using FlashcardsLiblary.ViewModelBase;
 using FlashcardsViewModels.UserControls;
@@ -11,28 +10,32 @@ namespace FlashcardsViewModels.Windows
     {
         #region [ Fields ]
 
-        private readonly IRepository<Set> _setRepository;
-        private readonly IRepository<Word> _wordRepository;
+        private readonly IDbModel model;
+
         private readonly INavigationService navigator;
+
         private readonly CreateSetViewModel createSetVM;
         private readonly SetsViewModel setsVM;
         private readonly SetViewModel setVM;
 
         #endregion [ Fields ]
 
-        public MainViewModel(IRepository<Set> setRepository, IRepository<Word> wordRepository)
+        public MainViewModel(IDbModel model)
         {
-            _setRepository = setRepository;
-            _wordRepository = wordRepository;
-            navigator = this;
-            navigator.NavigateTo(createSetVM = new());
+            this.model = model;
+
+            createSetVM = new();
             setsVM = new();
             setVM = new();
-            Sets = setRepository.GetAllAsync();
-            Words = wordRepository.GetAllAsync();
+
+            Sets = model.Sets.GetObservableCollection();
+            Words = model.Words.GetObservableCollection();
+
+            navigator = this;
             navigator.AddCreator(typeof(CreateSetViewModel), () => createSetVM);
             navigator.AddCreator(typeof(SetsViewModel), () => setsVM);
             navigator.AddCreator(typeof(SetViewModel), () => setVM);
+            navigator.NavigateTo(createSetVM);
         }
 
         #region [ Properties ]
@@ -44,40 +47,40 @@ namespace FlashcardsViewModels.Windows
 
         #region [ Commands ]
 
-        public RelayCommand CreateSetCommand => GetCommand<CreateSetViewModel>
-            (
-                async setVM =>
-                {
-                    await _setRepository.AddAsync(new Set(setVM.Id, setVM.Set!));
-                },
-                setVM => !string.IsNullOrEmpty(setVM.Set)
-            );
+        //public RelayCommand CreateSetCommand => GetCommand<CreateSetViewModel>
+        //    (
+        //        async setVM =>
+        //        {
+        //            await _setRepository.AddAsync(new Set(setVM.Id, setVM.Set!));
+        //        },
+        //        setVM => !string.IsNullOrEmpty(setVM.Set)
+        //    );
 
-        public RelayCommand SaveWordCommand => GetCommand<CreateSetViewModel>
-            (
-                async setVM =>
-                {
-                    var set = Sets.FirstOrDefault(s => s.Name == setVM.Set) ?? await _setRepository.AddAsync(new Set(setVM.Id, setVM.Set));
-                    await _wordRepository.AddAsync(new Word(
-                        setVM.Id,
-                        setVM.Word!,
-                        setVM.Definition,
-                        setVM.ImagePath,
-                        false,
-                        false,
-                        set.Id
-                        ));
-                },
-                setVM => !string.IsNullOrEmpty(setVM.Set) && !string.IsNullOrEmpty(setVM.Word)
-            );
+        //public RelayCommand SaveWordCommand => GetCommand<CreateSetViewModel>
+        //    (
+        //        async setVM =>
+        //        {
+        //            var set = Sets.FirstOrDefault(s => s.Name == setVM.Set) ?? await _setRepository.AddAsync(new Set(setVM.Id, setVM.Set));
+        //            await _wordRepository.AddAsync(new Word(
+        //                setVM.Id,
+        //                setVM.Word!,
+        //                setVM.Definition,
+        //                setVM.ImagePath,
+        //                false,
+        //                false,
+        //                set.Id
+        //                ));
+        //        },
+        //        setVM => !string.IsNullOrEmpty(setVM.Set) && !string.IsNullOrEmpty(setVM.Word)
+        //    );
 
-        public RelayCommand DeleteSetCommand => GetCommand<Set>
-            (
-                async set =>
-                {
-                    await _setRepository.DeleteAsync(set.Id);
-                }
-            );
+        //public RelayCommand DeleteSetCommand => GetCommand<Set>
+        //    (
+        //        async set =>
+        //        {
+        //            await _setRepository.DeleteAsync(set.Id);
+        //        }
+        //    );
 
         //public RelayCommand NavigateToCSViewCommand => new RelayCommand
         //    (
@@ -128,12 +131,7 @@ namespace FlashcardsViewModels.Windows
 
         public async Task LoadAsync()
         {
-            await _setRepository.LoadAsync();
-            await _wordRepository.LoadAsync();
-            foreach (var set in Sets)
-            {
-                set.Words = Words.Where(w => w.SetId == set.Id).ToList();
-            }
+            await model.LoadAsync();
         }
 
         #endregion [ Methods ]

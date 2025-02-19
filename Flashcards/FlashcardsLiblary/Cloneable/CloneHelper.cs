@@ -23,7 +23,7 @@
             }
             else
             {
-                clone = (T)MemberwiseCloneHandler.memberwiseClone(obj);
+                clone = (T)MemberwiseCloneHandler.memberwiseClone(obj!);
             }
             return clone;
         }
