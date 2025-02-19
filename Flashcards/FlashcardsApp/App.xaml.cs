@@ -1,7 +1,6 @@
 ﻿using FlashcardsApp.Windows;
 using FlashcardsLiblary;
 using FlashcardsViewModels.Windows;
-using Microsoft.EntityFrameworkCore.Storage;
 using System.Windows;
 
 namespace FlashcardsApp

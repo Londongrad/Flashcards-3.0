@@ -1,9 +1,6 @@
 ﻿using FlashcardsLiblary.Repository;
 using FlashcardsRepository.Configurations;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
-using Microsoft.Extensions.Configuration;
-using System.IO;
 
 namespace FlashcardsRepository
 {
@@ -20,7 +17,7 @@ namespace FlashcardsRepository
             //    .Build();
 
             //var connectionString = configuration.GetConnectionString("DBTest");
-            
+
             optionsBuilder
                 .UseSqlite($"Data Source=flashcards.db");
 
