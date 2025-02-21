@@ -10,11 +10,6 @@ namespace FlashcardsRepository.Configurations
         {
             builder.HasKey(c => c.Id);
 
-            builder.HasOne(c => c.Set)
-                .WithMany(c => c.Words)
-                .HasForeignKey(c => c.SetId)
-                .OnDelete(DeleteBehavior.Cascade);
-
             builder.HasIndex(c => c.Name).IsUnique();
 
             builder.Property(c => c.Name)

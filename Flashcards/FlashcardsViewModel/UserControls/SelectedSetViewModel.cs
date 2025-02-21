@@ -14,7 +14,7 @@ namespace FlashcardsViewModels.UserControls
         //    ShowFirstWord();
         //}
 
-        //#region [ Fields ]
+        #region [ Fields ]
         //public static SetCommand? setCommand;
         //private int i = 0;
         //private readonly bool _isChecked;
@@ -29,15 +29,15 @@ namespace FlashcardsViewModels.UserControls
         //private string _isVisibleDef = "Hidden";
         //private string _isVisibleImage = "Hidden";
         //private string _count = string.Empty;
-        //#endregion
+        #endregion
 
-        //#region [ Commmands ]
+        #region [ Commmands ]
         //public RelayCommand MixWordsCommand => new RelayCommand(async execute => await MixWords());
         //public RelayCommand EditCommand => new RelayCommand(execute => Edit());
         //public RelayCommand DeleteWordCommand => new RelayCommand(async execute => await DeleteWord());
-        //#endregion
+        #endregion
 
-        //#region [ Properties ]
+        #region [ Properties ]
         //public string WordName
         //{
         //    get { return _wordName; }
@@ -119,9 +119,9 @@ namespace FlashcardsViewModels.UserControls
         //        OnPropertyChanged();
         //    }
         //}
-        //#endregion
+        #endregion
 
-        //#region [ Methods ]
+        #region [ Methods ]
         //private async Task SayWordAsync(string word)
         //{
         //    var speechSynthesizer = new SpeechSynthesizer();
@@ -291,6 +291,6 @@ namespace FlashcardsViewModels.UserControls
         //    _words![i].IsLastWord = false;
         //    await _wordRepository.UpdateAsync(_words![i]);
         //}
-        //#endregion
+        #endregion
     }
 }

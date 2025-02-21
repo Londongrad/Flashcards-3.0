@@ -7,6 +7,6 @@
         public string Name { get; set; } = name;
 
         /// <summary>Навигационное свойство. Слова, которые относятся к набору</summary>
-        public List<Word>? Words { get; set; }
+        //public List<Word>? Words { get; set; }
     }
 }

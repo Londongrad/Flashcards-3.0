@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="/wwwroot/Themes/TextBlockTheme.xaml" />
                 <ResourceDictionary Source="/wwwroot/Themes/TextBoxTheme.xaml" />
                 <ResourceDictionary Source="/wwwroot/Themes/DeleteButtonTheme.xaml" />
+                <ResourceDictionary Source="/wwwroot/Themes/ScrollViewerTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <local:MainViewModel x:Key="mainVM" />
@@ -27,6 +28,14 @@
             <DataTemplate DataType="{x:Type vm:SetsViewModel}">
                 <views:SetsView />
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:SetViewModel}">
+                <views:SelectedSetView />
+            </DataTemplate>
+
+            <CollectionViewSource x:Key="sets"
+                                  Source="{Binding Sets, Source={StaticResource mainVM} }" />
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>
