@@ -1,0 +1,45 @@
+﻿<Application x:Class="Flashcards.App.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Flashcards.App"
+             xmlns:views="clr-namespace:Flashcards.App.UserControls"
+             xmlns:vm="clr-namespace:Flashcards.ViewModels.UserControls;assembly=Flashcards.ViewModels"
+             Startup="OnStartup"
+             ShutdownMode="OnMainWindowClose">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/wwwroot/Themes/MenuButtonTheme.xaml" />
+                <ResourceDictionary Source="/wwwroot/Themes/CSButtonTheme.xaml" />
+                <ResourceDictionary Source="/wwwroot/Themes/SetButtonTheme.xaml" />
+                <ResourceDictionary Source="/wwwroot/Themes/ToggleButtonTheme.xaml" />
+                <ResourceDictionary Source="/wwwroot/Themes/TextBlockTheme.xaml" />
+                <ResourceDictionary Source="/wwwroot/Themes/TextBoxTheme.xaml" />
+                <ResourceDictionary Source="/wwwroot/Themes/DeleteButtonTheme.xaml" />
+                <ResourceDictionary Source="/wwwroot/Themes/ScrollViewerTheme.xaml" />
+                <ResourceDictionary Source="/wwwroot/Themes/SelectedSetButtonsTheme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <local:MainViewModel x:Key="mainVM" />
+
+            <DataTemplate DataType="{x:Type vm:CreateSetViewModel}">
+                <views:CreateSetView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:SetsViewModel}">
+                <views:SetsView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type vm:SetViewModel}">
+                <views:SelectedSetView />
+            </DataTemplate>
+
+            <CollectionViewSource x:Key="sets"
+                                  Source="{Binding Sets, Source={StaticResource mainVM}}" />
+
+            <CollectionViewSource x:Key="words"
+                                  Source="{Binding WordsInSet, Source={StaticResource mainVM}}" />
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
