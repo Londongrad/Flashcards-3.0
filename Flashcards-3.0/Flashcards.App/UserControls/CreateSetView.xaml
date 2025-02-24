@@ -11,18 +11,35 @@
 
     <StackPanel Margin="0 50 0 0">
 
-        <TextBlock Text="Set creation"
-                   Style="{StaticResource TextBlock}" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Margin="160 0 0 30">
+            <TextBlock Text="Set creation"
+                       Style="{StaticResource TextBlock}"
+                       Grid.Row="0"
+                       Grid.Column="1" />
 
             <TextBox Style="{StaticResource TextBox}"
                      Text="{Binding Set,
                                     UpdateSourceTrigger=PropertyChanged}"
-                     MaxLength="2" />
+                     MaxLength="2"
+                     Grid.Row="1"
+                     Grid.Column="1" />
 
             <Button Command="{Binding CreateSetCommand,
                                       Mode=OneWay,
@@ -30,54 +47,66 @@
                     CommandParameter="{Binding}"
                     Content="Create only set"
                     Style="{StaticResource CSButtons}"
-                    Margin="20 0 0 0">
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    HorizontalAlignment="Left">
             </Button>
-        </StackPanel>
 
-        <TextBlock Text="Word"
-                   Style="{StaticResource TextBlock}" />
 
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    Margin="45 0 0 30">
+            <TextBlock Text="Word"
+                       Style="{StaticResource TextBlock}"
+                       Grid.Row="2"
+                       Grid.Column="1" />
 
             <TextBox Style="{StaticResource TextBox}"
                      Text="{Binding Word,
-                                    UpdateSourceTrigger=PropertyChanged}" />
+                                    UpdateSourceTrigger=PropertyChanged}"
+                     Grid.Row="4"
+                     Grid.Column="1"/>
 
             <Image Source="/wwwroot/Images/ex.png"
                    Height="40"
                    Width="40"
-                   Visibility="{Binding ExVis}" />
-        </StackPanel>
+                   Grid.Row="4"
+                   Grid.Column="2"
+                   HorizontalAlignment="Left"
+                   Margin="0 0 0 15" />
 
-        <TextBlock Text="Definition"
-                   Style="{StaticResource TextBlock}" />
+            <TextBlock Text="Definition"
+                       Style="{StaticResource TextBlock}"
+                       Grid.Row="5"
+                       Grid.Column="1" />
 
-        <TextBox Style="{StaticResource TextBox}"
-                 Text="{Binding Definition}"
-                 Margin="0 0 0 30" />
-
-        <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Center"
-                    Margin="50 0 0 30">
+            <TextBox Style="{StaticResource TextBox}"
+                     Text="{Binding Definition}"
+                     Margin="0 0 0 30"
+                     MaxHeight="100"
+                     Grid.Row="6"
+                     Grid.ColumnSpan="3" />
 
             <Button Style="{StaticResource CSButtons}"
                     Content="Path to the Image"
-                    Command="{Binding FindImageCommand}" />
+                    Command="{Binding FindImageCommand}"
+                    Grid.Row="7"
+                    Grid.Column="1" />
 
             <Image Source="/wwwroot/Images/ok.png"
                    Height="50"
                    Width="50"
-                   Visibility="{Binding ThumbUpVis}" />
-        </StackPanel>
+                   Margin="0 0 0 15"
+                   Grid.Row="7"
+                   Grid.Column="2"
+                   HorizontalAlignment="Left" />
 
-        <Button Content="Save the word"
-                Command="{Binding SaveWordCommand,
+            <Button Content="Save the word"
+                    Command="{Binding SaveWordCommand,
                                   Mode=OneWay,
                                   Source={StaticResource mainVM}}"
-                Style="{StaticResource CSButtons}"
-                CommandParameter="{Binding}"
-                Width="1" />
+                    Style="{StaticResource CSButtons}"
+                    CommandParameter="{Binding}"
+                    Width="1"
+                    Grid.Row="8"
+                    Grid.Column="1" />
+        </Grid>
     </StackPanel>
 </UserControl>

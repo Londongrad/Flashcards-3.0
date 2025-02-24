@@ -14,6 +14,7 @@
     <None Remove="wwwroot\Images\file_basket_red.png" />
     <None Remove="wwwroot\Images\ok.png" />
     <None Remove="wwwroot\Images\shutdown.png" />
+    <None Remove="wwwroot\Images\test.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +39,7 @@
     <Resource Include="wwwroot\Images\file_basket_red.png" />
     <Resource Include="wwwroot\Images\ok.png" />
     <Resource Include="wwwroot\Images\shutdown.png" />
+    <Resource Include="wwwroot\Images\test.jpg" />
   </ItemGroup>
 
   <ItemGroup>

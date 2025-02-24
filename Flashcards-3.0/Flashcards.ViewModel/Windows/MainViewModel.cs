@@ -44,7 +44,6 @@ namespace Flashcards.ViewModels.Windows
 
         public ReadOnlyObservableCollection<Set> Sets { get; }
         public ReadOnlyObservableCollection<Word> Words { get; }
-        public List<Word>? WordsInSet { get; set; }
 
         #endregion [ Properties ]
 
@@ -82,7 +81,7 @@ namespace Flashcards.ViewModels.Windows
 
         public RelayCommand DeleteSetCommand => GetCommand<Set>
             (
-                async set =>
+                set =>
                 {
                     //await model.Sets.DeleteAsync(set.Id);
                 }
@@ -92,7 +91,7 @@ namespace Flashcards.ViewModels.Windows
             (
                 set =>
                 {
-                    setVM.Words = WordsInSet = Words.Where(w => w.SetId == set.Id).ToList();
+                    setVM.Words = Words.Where(w => w.SetId == set.Id).ToList();
                     navigator.NavigateTo(setVM);
                 },
                 set => Words.Where(w => w.SetId == set.Id).ToList().Count > 0

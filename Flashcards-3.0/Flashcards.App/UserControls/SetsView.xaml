@@ -6,10 +6,13 @@
              xmlns:viewVM="clr-namespace:Flashcards.ViewModels.UserControls;assembly=Flashcards.ViewModels"
              xmlns:rep="clr-namespace:Flashcards.Liblary.Repository;assembly=Flashcards.Liblary"
              xmlns:local="clr-namespace:Flashcards.App.UserControls"
-             d:DataContext="{d:DesignInstance Type=viewVM:SetViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="500"
              d:DesignWidth="800">
+    
+    <UserControl.Resources>
+        <viewVM:SetViewModel x:Key="vm" />
+    </UserControl.Resources>
 
     <ScrollViewer VerticalScrollBarVisibility="Visible"
                   HorizontalScrollBarVisibility="Hidden"
@@ -77,10 +80,10 @@
                                                HorizontalAlignment="Left"
                                                FontSize="12" />
 
-                                    <CheckBox Style="{DynamicResource ToggleButton}"
+                                    <CheckBox Style="{StaticResource ToggleButton}"
                                               VerticalAlignment="Top"
                                               HorizontalAlignment="Center"
-                                              IsChecked="{Binding IsChecked}" />
+                                              IsChecked="{Binding HideDef, Source={StaticResource vm}}"/>
 
                                     <TextBlock Style="{StaticResource TextBlock}"
                                                Text="Hide Word"
@@ -113,7 +116,7 @@
                                         Grid.Row="2">
 
                                     <TextBlock Style="{StaticResource TextBlock}"
-                                        Text="Delete all favorite words" />
+                                               Text="Delete all favorite words" />
                                 </Button>
 
                                 <Button Style="{StaticResource CSButtons}"

@@ -8,8 +8,8 @@
              xmlns:usercontrols="clr-namespace:Flashcards.ViewModels.UserControls;assembly=Flashcards.ViewModels"
              d:DataContext="{d:DesignInstance Type=usercontrols:SetViewModel}"
              mc:Ignorable="d"
-             d:DesignHeight="450"
-             d:DesignWidth="800">
+             d:DesignHeight="800"
+             d:DesignWidth="900">
     
     <FrameworkElement.CommandBindings>
         <CommandBinding Command="BrowseBack"
@@ -19,13 +19,20 @@
                         CanExecute="OnForwardCanExecute"
                         Executed="OnForwardExecute" />
     </FrameworkElement.CommandBindings>
-    
+
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="words"
+                              Source="{Binding Words}" />
+    </UserControl.Resources>
+
     <Grid>
         <ContentControl Content="{Binding CurrentItem, Mode=OneWay, Source={StaticResource words}}">
 
             <d:ContentControl.Content>
                 <local:Word Name="Water"
-                            Definition="Definition of water" />
+                            Definition="Definition of water" 
+                            ImagePath="../wwwroot/Images/test.jpg"
+                            IsFavorite="False"/>
             </d:ContentControl.Content>
 
             <ContentControl.ContentTemplate>
@@ -38,15 +45,17 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Button Style="{StaticResource SelectedButtons}"
+                            
+                            <Button Style="{StaticResource SelectedButtons}"                
                                     Content="Mix words"
                                     Command="{Binding MixWordsCommand}"
                                     HorizontalAlignment="Left" />
-
-                            <TextBlock Grid.Column="1"
-                                       Text="{Binding Count}"
-                                       Style="{StaticResource TextBlock}" />
-
+                            
+                            <TextBlock Text="500"
+                                       Style="{StaticResource TextBlock}"
+                                       Grid.Column="1"
+                                       Margin="124,0,0,15"/>
+                            <!--TODO Убрать Margin-->
 
                             <Button Grid.Column="2"
                                     Style="{StaticResource SelectedButtons}"
@@ -64,22 +73,52 @@
                         <Ellipse Width="30"
                                  Height="30"
                                  Fill="Yellow"
-                                 Visibility="{Binding IsFavorite}"
-                                 Margin="0 10 0 0" />
+                                 Margin="0 10 0 15"
+                                 HorizontalAlignment="Center"
+                                 VerticalAlignment="Center">
+                            <Ellipse.Style>
+                                <Style TargetType="Ellipse">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsFavorite}"
+                                                     Value="False">
+                                            <Setter Property="Visibility"
+                                                    Value="Hidden" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Ellipse.Style>
+                            
+                            
+                        </Ellipse>
 
                         <TextBlock Text="{Binding Name}"
-                                   Style="{StaticResource TextBlock}"
-                                   Visibility="{Binding IsVisibleWord}" />
+                                   FontSize="36">
+                            <TextBlock.Style>
+                                <Style BasedOn="{StaticResource TextBlock}"
+                                       TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding DataContext.HideDef,
+                                                                  RelativeSource={RelativeSource Mode=FindAncestor,
+                                                                  AncestorType=local:SelectedSetView}}"
+                                                     Value="True">
+                                            <Setter Property="Visibility"
+                                                    Value="Hidden" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
 
                         <TextBlock Text="{Binding Definition}"
                                    Style="{StaticResource TextBlock}"
-                                   Visibility="{Binding IsVisibleDef}" />
+                                   FontSize="36"/>
+                        
+                        <Grid Width="700"
+                              Height="500">
+                            <Image Source="{Binding ImagePath}" />
+                        </Grid>
 
-                        <Image x:Name="Image"
-                               Source="{Binding ImagePath}"
-                               Visibility="{Binding IsVisibleImage}"
-                               MaxHeight="450"
-                               MaxWidth="800" />
+                        
                         <Grid>
                             
                             <Button Content="Предыдущий"

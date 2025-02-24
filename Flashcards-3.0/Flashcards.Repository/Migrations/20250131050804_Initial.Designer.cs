@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace FlashcardsRepository.Migrations
+namespace Flashcards.Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20250131050804_Initial")]

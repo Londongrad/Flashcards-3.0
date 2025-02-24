@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace FlashcardsRepository.Migrations
+namespace Flashcards.Repository.Migrations
 {
     /// <inheritdoc />
     public partial class Initial : Migration

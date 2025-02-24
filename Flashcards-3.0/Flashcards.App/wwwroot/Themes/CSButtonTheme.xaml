@@ -43,7 +43,7 @@
         <Setter Property="Foreground"
                 Value="AliceBlue" />
         <Setter Property="BorderThickness"
-                Value="1" />
+                Value="0" />
         <Setter Property="HorizontalContentAlignment"
                 Value="Center" />
         <Setter Property="VerticalContentAlignment"
@@ -51,7 +51,7 @@
         <Setter Property="Padding"
                 Value="10" />
         <Setter Property="Margin"
-                Value="3" />
+                Value="0 0 10 15" />
         <Setter Property="FontSize"
                 Value="20" />
         <Setter Property="FontWeight"
@@ -60,6 +60,8 @@
                 Value="150" />
         <Setter Property="MinHeight"
                 Value="50" />
+        <Setter Property="MaxWidth"
+                Value="200" />
 
         <Setter Property="Template">
             <Setter.Value>
@@ -69,7 +71,7 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             SnapsToDevicePixels="true"
-                            CornerRadius="30">
+                            CornerRadius="8">
                         <ContentPresenter x:Name="contentPresenter"
                                           Focusable="False"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -89,7 +91,7 @@
                                  Value="true">
                             <Setter Property="Background"
                                     TargetName="border"
-                                    Value="{StaticResource Button.MouseOver.Background}" />
+                                    Value="#181735" />
                             <Setter Property="BorderBrush"
                                     TargetName="border"
                                     Value="{StaticResource Button.MouseOver.Border}" />

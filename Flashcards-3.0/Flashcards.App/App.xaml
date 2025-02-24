@@ -37,9 +37,6 @@
             <CollectionViewSource x:Key="sets"
                                   Source="{Binding Sets, Source={StaticResource mainVM}}" />
 
-            <CollectionViewSource x:Key="words"
-                                  Source="{Binding WordsInSet, Source={StaticResource mainVM}}" />
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>

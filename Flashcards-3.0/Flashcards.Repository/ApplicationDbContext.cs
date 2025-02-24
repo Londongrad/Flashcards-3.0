@@ -18,13 +18,12 @@ namespace Flashcards.Repository
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .Build();
 
-            var connectionString = configuration.GetConnectionString("DBMain");
-
-            //optionsBuilder
-            //.UseSqlite($"Data Source=flashcards.db");
-
+            //var connectionString = configuration.GetConnectionString("SQLServerDBMain");
+            var connectionString = configuration.GetConnectionString("SQLServerDBTest");
             optionsBuilder.UseSqlServer(connectionString);
 
+            //var connectionString = configuration.GetConnectionString("SQLite");
+            //optionsBuilder.UseSqlite(connectionString);
 
             base.OnConfiguring(optionsBuilder);
         }

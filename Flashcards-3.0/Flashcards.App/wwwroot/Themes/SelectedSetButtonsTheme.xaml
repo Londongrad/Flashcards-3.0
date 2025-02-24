@@ -50,7 +50,7 @@
         <Setter Property="Padding"
                 Value="10" />
         <Setter Property="Margin"
-                Value="3" />
+                Value="0 0 0 15" />
         <Setter Property="FontSize"
                 Value="20" />
         <Setter Property="FontWeight"

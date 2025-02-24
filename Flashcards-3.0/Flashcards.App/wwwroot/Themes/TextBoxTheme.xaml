@@ -29,6 +29,8 @@
                 Value="False" />
         <Setter Property="MinHeight"
                 Value="40" />
+        <Setter Property="MaxHeight"
+                Value="40" />
         <Setter Property="MinWidth"
                 Value="150" />
         <Setter Property="MaxWidth"
@@ -46,7 +48,7 @@
         <Setter Property="CaretBrush"
                 Value="AliceBlue" />
         <Setter Property="Margin"
-                Value="0 0 0 0" />
+                Value="0 0 10 15" />
         <Setter Property="Padding"
                 Value="5" />
         <Setter Property="TextWrapping"
