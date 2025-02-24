@@ -37,6 +37,8 @@
             <CollectionViewSource x:Key="sets"
                                   Source="{Binding Sets, Source={StaticResource mainVM}}" />
 
+            <vm:SetViewModel x:Key="vm" />
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

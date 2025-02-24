@@ -5,6 +5,9 @@ using Flashcards.Liblary.ViewModelBase;
 using Flashcards.ViewModels.UserControls;
 using System.Collections.ObjectModel;
 
+//TODO: 2 таска в SetsView, 1 такс в SelectedSetView, 1 такс в CreateSetView
+
+
 namespace Flashcards.ViewModels.Windows
 {
     public class MainViewModel : ViewModelBase, INavigationService
@@ -81,9 +84,10 @@ namespace Flashcards.ViewModels.Windows
 
         public RelayCommand DeleteSetCommand => GetCommand<Set>
             (
-                set =>
+                async set =>
                 {
-                    //await model.Sets.DeleteAsync(set.Id);
+                    //TODO Нужно предупреждение о действии.
+                    await model.Sets.DeleteAsync(set.Id);
                 }
             );
 
@@ -97,47 +101,6 @@ namespace Flashcards.ViewModels.Windows
                 set => Words.Where(w => w.SetId == set.Id).ToList().Count > 0
             );
 
-        //public RelayCommand NavigateToCSViewCommand => new RelayCommand
-        //    (
-        //        execute => Navigation.NavigateTo(App.ServiceProvider!.GetRequiredService<CSViewModel>())
-        //    );
-        //public RelayCommand NavigateToSetsViewCommand => new RelayCommand
-        //    (
-        //        execute => Navigation.NavigateTo(App.ServiceProvider!.GetRequiredService<SetsViewModel>())
-        //    );
-        //public RelayCommand SetVisibility => new RelayCommand
-        //    (
-        //    execute => SelectedSetViewModel.setCommand!(0),
-        //    canExecute => Navigation!.CurrentView is SelectedSetViewModel
-        //    );
-        //public RelayCommand GoForward => new RelayCommand
-        //    (
-        //    execute => SelectedSetViewModel.setCommand!(1),
-        //    canExecute => Navigation!.CurrentView is SelectedSetViewModel
-        //    );
-        //public RelayCommand GoBack => new RelayCommand
-        //    (
-        //    execute => SelectedSetViewModel.setCommand!(2),
-        //    canExecute => Navigation!.CurrentView is SelectedSetViewModel
-        //    );
-        //public RelayCommand ToFavorite => new RelayCommand
-        //    (
-        //    execute => SelectedSetViewModel.setCommand!(3),
-        //    canExecute => Navigation!.CurrentView is SelectedSetViewModel
-        //    );
-        //public RelayCommand Import => new RelayCommand(async execute =>
-        //    {
-        //        //var words = new List<WordEntity>();
-        //        //var path = "C:\\Users\\h-b-1\\Desktop\\words.json";
-
-        //        //var res = JsonConvert.DeserializeObject<List<WordEntity>>(File.ReadAllText(path))!;
-        //        //foreach (var word in res)
-        //        //{
-        //        //    await _wordRepository!.AddAsync(word);
-        //        //}
-        //    }
-        //    );
-
         #endregion [ Commands ]
 
         #region [ Methods ]
@@ -147,6 +110,25 @@ namespace Flashcards.ViewModels.Windows
         public async Task LoadAsync()
         {
             await model.LoadAsync();
+        }
+
+        /// <summary>
+        /// Нужен функционал проверки наличия слова в сете. Если слово есть, то нужно об этом уведомить View и установить Visibility у картинки в Visible.</br>
+        /// Также отключить кнопку Save the word, так как само слово должно быть УНИКАЛЬНЫМ по условию в базе.
+        /// </summary>
+        public bool CheckWordIfExists()
+        {
+            if (!string.IsNullOrEmpty(createSetVM.Word))
+            {
+                foreach (var word in Words)
+                {
+                    if (word.Name == createSetVM.Word)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         #endregion [ Methods ]

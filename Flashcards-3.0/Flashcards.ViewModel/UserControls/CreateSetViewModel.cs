@@ -53,12 +53,17 @@ namespace Flashcards.ViewModels.UserControls
             //if (result == true)
             //    ImagePath = dlg.FileName;
 
-            // You can use this code, if you're lazy to select and image. Just predefine the path and name you image just like a word. And it will choose it automatically by pressing a button.
 
+            // You can use this code, if you're lazy to select and image.
+            // Just predefine the path and name your image just like a word.
+            // And it will choose it automatically by pressing a button.
+            // Otherwise use code above instead.
             ImagePath = Directory.GetFiles("D:\\Download\\Images", Word + ".*", SearchOption.AllDirectories).FirstOrDefault()!;
         },
         () => !string.IsNullOrEmpty(Word)
+
     );
+
         #endregion [ Commands ]
     }
 }

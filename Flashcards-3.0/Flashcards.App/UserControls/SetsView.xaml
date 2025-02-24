@@ -9,10 +9,6 @@
              mc:Ignorable="d"
              d:DesignHeight="500"
              d:DesignWidth="800">
-    
-    <UserControl.Resources>
-        <viewVM:SetViewModel x:Key="vm" />
-    </UserControl.Resources>
 
     <ScrollViewer VerticalScrollBarVisibility="Visible"
                   HorizontalScrollBarVisibility="Hidden"
@@ -48,9 +44,11 @@
                                     <TextBlock Text="{Binding Name}"
                                                HorizontalAlignment="Center"
                                                Margin="0 0 0 10" />
-                                    <TextBlock Text="{Binding Set.Words.Count,
-                                                              StringFormat='{}{0} words',
-                                                              Source={StaticResource sets}}" />
+                                    <TextBlock Text="{Binding Name,
+                                                              StringFormat='{}{0} words'}" />
+                                    <!--TODO В TextBlock выше вместо Name необходимо вывести количество слов в каждом сете.
+                                    Без навигационных свойств пока не знаю, как это сделать.
+                                    Сейчас стоит заглушка.-->
                                 </StackPanel>
                             </Button>
 
@@ -83,7 +81,9 @@
                                     <CheckBox Style="{StaticResource ToggleButton}"
                                               VerticalAlignment="Top"
                                               HorizontalAlignment="Center"
-                                              IsChecked="{Binding HideDef, Source={StaticResource vm}}"/>
+                                              IsChecked="{Binding Path=setVM.HideDef, Source={StaticResource mainVM}}"/>
+                                    <!--TODO Из CheckBox выше нужно отправить состояние в SelectedSetView.
+                                    Пока безрезультатно-->
 
                                     <TextBlock Style="{StaticResource TextBlock}"
                                                Text="Hide Word"

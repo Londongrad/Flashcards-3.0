@@ -62,7 +62,7 @@
                      Text="{Binding Word,
                                     UpdateSourceTrigger=PropertyChanged}"
                      Grid.Row="4"
-                     Grid.Column="1"/>
+                     Grid.Column="1" />
 
             <Image Source="/wwwroot/Images/ex.png"
                    Height="40"
@@ -70,7 +70,21 @@
                    Grid.Row="4"
                    Grid.Column="2"
                    HorizontalAlignment="Left"
-                   Margin="0 0 0 15" />
+                   Margin="0 0 0 15">
+                <Image.Style>
+                <Style TargetType="Image">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding CheckWordIfExists,
+                                                       Source={StaticResource mainVM}}"
+                                     Value="False">
+                            <Setter Property="Visibility"
+                                    Value="Hidden" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+                </Image.Style>
+            </Image>
+            <!--TODO Для Image выше нужен функционал, см в главной модели метод CheckWordIfExists-->
 
             <TextBlock Text="Definition"
                        Style="{StaticResource TextBlock}"
@@ -96,7 +110,19 @@
                    Margin="0 0 0 15"
                    Grid.Row="7"
                    Grid.Column="2"
-                   HorizontalAlignment="Left" />
+                   HorizontalAlignment="Left">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ImagePath}"
+                                         Value="">
+                                <Setter Property="Visibility"
+                                        Value="Hidden" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
 
             <Button Content="Save the word"
                     Command="{Binding SaveWordCommand,

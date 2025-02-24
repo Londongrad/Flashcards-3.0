@@ -10,7 +10,7 @@
              mc:Ignorable="d"
              d:DesignHeight="800"
              d:DesignWidth="900">
-    
+
     <FrameworkElement.CommandBindings>
         <CommandBinding Command="BrowseBack"
                         CanExecute="OnBackCanExecute"
@@ -36,7 +36,7 @@
             </d:ContentControl.Content>
 
             <ContentControl.ContentTemplate>
-                <DataTemplate DataType="rep:Word">
+                <DataTemplate>
                     <StackPanel>
                         <Grid>
                             <Grid.ColumnDefinitions>
@@ -50,12 +50,22 @@
                                     Content="Mix words"
                                     Command="{Binding MixWordsCommand}"
                                     HorizontalAlignment="Left" />
-                            
-                            <TextBlock Text="500"
-                                       Style="{StaticResource TextBlock}"
+
+                            <TextBlock Style="{StaticResource TextBlock}"
                                        Grid.Column="1"
-                                       Margin="124,0,0,15"/>
-                            <!--TODO Убрать Margin-->
+                                       Margin="124,0,0,15">
+                                <TextBlock.Text>
+                                    <MultiBinding StringFormat="{}{0}/{1}">
+                                        <Binding Path="Count"
+                                                 Source="{StaticResource words}" />
+
+                                    </MultiBinding>
+                                </TextBlock.Text> 
+                            <!--TODO Убрать Margin в TextBlock, сделать элемент строго по центру.
+                                Также через MultiBinding??? сделать что-то вроде Текущий элемент из скольки-то.
+                                Пример: 5/500-->
+                            </TextBlock>
+
 
                             <Button Grid.Column="2"
                                     Style="{StaticResource SelectedButtons}"
@@ -92,14 +102,12 @@
                         </Ellipse>
 
                         <TextBlock Text="{Binding Name}"
-                                   FontSize="36">
+                                   FontSize="40">
                             <TextBlock.Style>
                                 <Style BasedOn="{StaticResource TextBlock}"
                                        TargetType="TextBlock">
                                     <Style.Triggers>
-                                        <DataTrigger Binding="{Binding DataContext.HideDef,
-                                                                  RelativeSource={RelativeSource Mode=FindAncestor,
-                                                                  AncestorType=local:SelectedSetView}}"
+                                        <DataTrigger Binding="{Binding HideDef, Source={StaticResource vm}}"
                                                      Value="True">
                                             <Setter Property="Visibility"
                                                     Value="Hidden" />
@@ -111,10 +119,10 @@
 
                         <TextBlock Text="{Binding Definition}"
                                    Style="{StaticResource TextBlock}"
-                                   FontSize="36"/>
+                                   FontSize="40"/>
                         
                         <Grid Width="700"
-                              Height="500">
+                              Height="480">
                             <Image Source="{Binding ImagePath}" />
                         </Grid>
 

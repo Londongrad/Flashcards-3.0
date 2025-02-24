@@ -20,6 +20,7 @@ namespace Flashcards.Liblary.Repository
         /// из которого можно получить <see cref="DbSet{TEntity}">DbSet&lt;<typeparamref name="TId"/>&gt;</see>.</param>
         public DbRepository(DbContext context, Func<DbContext> contextCreator)
         {
+            context.Database.EnsureCreated();
             this.context = context;
             dbSet = context.Set<TId>();
             this.contextCreator = contextCreator;

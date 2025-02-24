@@ -20,8 +20,5 @@
 
         /// <summary>Внешний ключ</summary>
         public int SetId { get; set; } = setId;
-
-        /// <summary>Навигационное свойство. Сет, к которому относится слово</summary>
-        //public Set? Set { get; set; }
     }
 }

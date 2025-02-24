@@ -19,11 +19,11 @@ namespace Flashcards.Repository
                 .Build();
 
             //var connectionString = configuration.GetConnectionString("SQLServerDBMain");
-            var connectionString = configuration.GetConnectionString("SQLServerDBTest");
-            optionsBuilder.UseSqlServer(connectionString);
+            //var connectionString = configuration.GetConnectionString("SQLServerDBTest");
+            //optionsBuilder.UseSqlServer(connectionString);
 
-            //var connectionString = configuration.GetConnectionString("SQLite");
-            //optionsBuilder.UseSqlite(connectionString);
+            var connectionString = configuration.GetConnectionString("SQLite");
+            optionsBuilder.UseSqlite(connectionString);
 
             base.OnConfiguring(optionsBuilder);
         }
