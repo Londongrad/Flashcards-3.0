@@ -20,6 +20,6 @@
         <Setter Property="TextWrapping"
                 Value="WrapWithOverflow" />
         <Setter Property="TextAlignment"
-                Value="Center"/>
+                Value="Center" />
     </Style>
 </ResourceDictionary>

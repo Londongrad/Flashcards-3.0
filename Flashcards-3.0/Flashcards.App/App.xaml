@@ -18,6 +18,7 @@
                 <ResourceDictionary Source="/wwwroot/Themes/DeleteButtonTheme.xaml" />
                 <ResourceDictionary Source="/wwwroot/Themes/ScrollViewerTheme.xaml" />
                 <ResourceDictionary Source="/wwwroot/Themes/SelectedSetButtonsTheme.xaml" />
+                <ResourceDictionary Source="/wwwroot/Themes/SetsButtonsTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <local:MainViewModel x:Key="mainVM" />
@@ -36,9 +37,6 @@
 
             <CollectionViewSource x:Key="sets"
                                   Source="{Binding Sets, Source={StaticResource mainVM}}" />
-
-            <vm:SetViewModel x:Key="vm" />
-
         </ResourceDictionary>
     </Application.Resources>
 </Application>

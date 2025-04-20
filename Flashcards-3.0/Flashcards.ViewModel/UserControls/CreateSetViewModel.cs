@@ -1,6 +1,6 @@
 ﻿using Flashcards.Liblary.Command;
 using Flashcards.Liblary.ViewModelBase;
-using System.IO;
+using Microsoft.Win32;
 
 namespace Flashcards.ViewModels.UserControls
 {
@@ -12,7 +12,6 @@ namespace Flashcards.ViewModels.UserControls
             Set = string.Empty;
             Word = string.Empty;
             Definition = string.Empty;
-            ImagePath = string.Empty;
         }
 
         #region [ Properties ]
@@ -32,38 +31,51 @@ namespace Flashcards.ViewModels.UserControls
         { get => Get<string>()!; set { Set(value); } }
 
         /// <summary>Путь до картинки к слову</summary>
-        public string ImagePath
-        { get => Get<string>()!; set { Set(value); } }
+        public string? ImagePath
+        { get => Get<string>(); set { Set(value); } }
 
         #endregion [ Properties ]
 
         #region [ Commands ]
+
         public RelayCommand FindImageCommand => GetCommand
     (
         () =>
         {
-            //OpenFileDialog dlg = new()
-            //{
-            //    Filter = "All Pictures (*.emf;*.wmf;*.jpg;*.jpeg;*.jfif;*.jpe;*.png;*.bmp;*.dib;*.rle;*.gif;*.emz;*.wmz;*.tif;*.tiff;*.svg;*.ico;*.webp)" +
-            //             "|*.emf;*.wmf;*.jpg;*.jpeg;*.jfif;*.jpe;*.png;*.bmp;*.dib;*.rle;*.gif;*.emz;*.wmz;*.tif;*.tiff;*.svg;*.ico;*.webp"
-            //};
+            OpenFileDialog dlg = new()
+            {
+                Filter = "All Pictures (*.emf;*.wmf;*.jpg;*.jpeg;*.jfif;*.jpe;*.png;*.bmp;*.dib;*.rle;*.gif;*.emz;*.wmz;*.tif;*.tiff;*.svg;*.ico;*.webp)" +
+                         "|*.emf;*.wmf;*.jpg;*.jpeg;*.jfif;*.jpe;*.png;*.bmp;*.dib;*.rle;*.gif;*.emz;*.wmz;*.tif;*.tiff;*.svg;*.ico;*.webp",
+                InitialDirectory = "D:\\Download\\Images"
+            };
 
-            //Nullable<bool> result = dlg.ShowDialog();
+            Nullable<bool> result = dlg.ShowDialog();
 
-            //if (result == true)
-            //    ImagePath = dlg.FileName;
+            if (result == true)
+                ImagePath = dlg.FileName;
 
-
-            // You can use this code, if you're lazy to select and image.
+            // You can use this code, if you're lazy to select an image.
             // Just predefine the path and name your image just like a word.
-            // And it will choose it automatically by pressing a button.
+            // And it will choose it automatically by pressing the save button.
             // Otherwise use code above instead.
-            ImagePath = Directory.GetFiles("D:\\Download\\Images", Word + ".*", SearchOption.AllDirectories).FirstOrDefault()!;
+            //ImagePath = Directory.GetFiles("D:\\Download\\Images", Word + ".*", SearchOption.AllDirectories).FirstOrDefault()!;
         },
         () => !string.IsNullOrEmpty(Word)
 
     );
 
         #endregion [ Commands ]
+
+        #region [ Methods ]
+
+        public void Clear()
+        {
+            Id = 0;
+            Word = string.Empty;
+            Definition = string.Empty;
+            ImagePath = null;
+        }
+
+        #endregion [ Methods ]
     }
 }

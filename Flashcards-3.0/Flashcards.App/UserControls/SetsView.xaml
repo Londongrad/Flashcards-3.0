@@ -7,7 +7,7 @@
              xmlns:rep="clr-namespace:Flashcards.Liblary.Repository;assembly=Flashcards.Liblary"
              xmlns:local="clr-namespace:Flashcards.App.UserControls"
              mc:Ignorable="d"
-             d:DesignHeight="500"
+             d:DesignHeight="600"
              d:DesignWidth="800">
 
     <ScrollViewer VerticalScrollBarVisibility="Visible"
@@ -62,7 +62,7 @@
 
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30" />
-                                    <RowDefinition Height="80" />
+                                    <RowDefinition Height="Auto" />
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
 
@@ -81,9 +81,7 @@
                                     <CheckBox Style="{StaticResource ToggleButton}"
                                               VerticalAlignment="Top"
                                               HorizontalAlignment="Center"
-                                              IsChecked="{Binding Path=setVM.HideDef, Source={StaticResource mainVM}}"/>
-                                    <!--TODO Из CheckBox выше нужно отправить состояние в SelectedSetView.
-                                    Пока безрезультатно-->
+                                              IsChecked="{Binding SetVMProp.HideDef, Source={StaticResource mainVM}}" />
 
                                     <TextBlock Style="{StaticResource TextBlock}"
                                                Text="Hide Word"
@@ -93,7 +91,7 @@
                                                FontSize="12" />
                                 </StackPanel>
 
-                                <Button Style="{StaticResource CSButtons}"
+                                <Button Style="{StaticResource SetsButton}"
                                         Background="#FF483D8B"
                                         HorizontalContentAlignment="Center"
                                         Command="{Binding SelectFavWordsCommand}"
@@ -102,33 +100,32 @@
                                     <StackPanel>
 
                                         <TextBlock Style="{StaticResource TextBlock}"
-                                                   Text="Only favorite" />
-                                        <TextBlock Text="{Binding NumOfFavWords,
-                                                                  StringFormat='{}{0} words',
-                                                                  Mode=OneWay,
-                                                                  Source={StaticResource mainVM}}"
-                                                   Style="{StaticResource TextBlock}" />
+                                                   Text="Only favorite"
+                                                   Margin="0" />
+
+                                        <TextBlock Text="100 words"
+                                                   Style="{StaticResource TextBlock}"
+                                                   Margin="0" />
                                     </StackPanel>
                                 </Button>
 
-                                <Button Style="{StaticResource CSButtons}"
+                                <Button Style="{StaticResource SetsButton}"
                                         Command="{Binding DeleteAllFavoriteCommand}"
                                         Grid.Row="2">
 
                                     <TextBlock Style="{StaticResource TextBlock}"
-                                               Text="Delete all favorite words" />
+                                               Text="Delete all favorite words"
+                                               Margin="0" />
                                 </Button>
 
-                                <Button Style="{StaticResource CSButtons}"
+                                <Button Style="{StaticResource SetsButton}"
                                         Grid.Column="1"
                                         Padding="4"
                                         Grid.Row="1"
                                         Command="{Binding AddToFavInRangeCommand}">
 
                                     <TextBlock Style="{StaticResource TextBlock}"
-                                               Text="Add or delete favorite in range"
-                                               Width="125"
-                                               FontSize="18" />
+                                               Text="Add or delete favorite in range" />
                                 </Button>
 
                                 <StackPanel Orientation="Horizontal"
@@ -142,16 +139,16 @@
                                                             UpdateSourceTrigger=PropertyChanged}"
                                              Style="{StaticResource TextBox}"
                                              MinWidth="60"
-                                             MaxLength="4" />
+                                             MaxLength="4"
+                                             Margin="0 0 10 0" />
 
                                     <TextBox Grid.Row="1"
                                              Text="{Binding RangeEnd,
                                                             UpdateSourceTrigger=PropertyChanged}"
                                              Style="{StaticResource TextBox}"
                                              MinWidth="60"
-                                             Margin="20 0 0 0"
-                                             MaxLength="4"
-                                             Padding="6" />
+                                             Margin="10 0 0 0"
+                                             MaxLength="4" />
                                 </StackPanel>
 
                                 <Button Style="{StaticResource DeleteButtonStyle}"

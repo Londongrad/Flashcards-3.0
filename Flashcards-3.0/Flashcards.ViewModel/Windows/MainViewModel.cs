@@ -5,9 +5,6 @@ using Flashcards.Liblary.ViewModelBase;
 using Flashcards.ViewModels.UserControls;
 using System.Collections.ObjectModel;
 
-//TODO: 2 таска в SetsView, 1 такс в SelectedSetView, 1 такс в CreateSetView
-
-
 namespace Flashcards.ViewModels.Windows
 {
     public class MainViewModel : ViewModelBase, INavigationService
@@ -31,6 +28,7 @@ namespace Flashcards.ViewModels.Windows
             createSetVM = new();
             setsVM = new();
             setVM = new();
+            SetVMProp = setVM;
 
             Sets = model.Sets.GetObservableCollection();
             Words = model.Words.GetObservableCollection();
@@ -47,6 +45,7 @@ namespace Flashcards.ViewModels.Windows
 
         public ReadOnlyObservableCollection<Set> Sets { get; }
         public ReadOnlyObservableCollection<Word> Words { get; }
+        public SetViewModel SetVMProp { get; private set; }
 
         #endregion [ Properties ]
 
@@ -78,6 +77,8 @@ namespace Flashcards.ViewModels.Windows
                         false,
                         set.Id
                         ));
+
+                    setVM.Clear();
                 },
                 setVM => !string.IsNullOrEmpty(setVM.Set) && !string.IsNullOrEmpty(setVM.Word)
             );

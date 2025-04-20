@@ -12,6 +12,7 @@ namespace Flashcards.App.UserControls
         public bool IsFavorite { get; set; }
         public bool IsLastWord { get; set; }
         public int SetId { get; set; }
+
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
             return new Word(Id, Name, Definition, ImagePath, IsFavorite, IsLastWord, SetId);

@@ -48,10 +48,14 @@
                 Value="Center" />
         <Setter Property="VerticalContentAlignment"
                 Value="Center" />
+        <Setter Property="HorizontalAlignment"
+                Value="Center" />
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
         <Setter Property="Padding"
                 Value="10" />
         <Setter Property="Margin"
-                Value="0 0 10 15" />
+                Value="15" />
         <Setter Property="FontSize"
                 Value="20" />
         <Setter Property="FontWeight"
