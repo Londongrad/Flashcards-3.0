@@ -10,6 +10,10 @@
              d:DesignHeight="800"
              d:DesignWidth="900">
 
+    <UserControl.Resources>
+        <local:Converter x:Key="Converter" />
+    </UserControl.Resources>
+
     <FrameworkElement.CommandBindings>
         <CommandBinding Command="BrowseBack"
                         CanExecute="OnBackCanExecute"
@@ -29,8 +33,8 @@
             <d:ContentControl.Content>
                 <local:Word Name="Water"
                             Definition="Definition of water"
-                            ImagePath="../wwwroot/Images/test.jpg"
-                            IsFavorite="False" />
+                            ImagePath="..\wwwroot\Images\test.jpg"
+                            IsFavorite="True" />
             </d:ContentControl.Content>
 
             <ContentControl.ContentTemplate>
@@ -53,7 +57,7 @@
                             <TextBlock Grid.Column="1"
                                        Style="{StaticResource TextBlock}"
                                        Margin="0">
-                                <Run Text="{Binding SelectedIndex, ElementName=listWords}" />
+                                <Run Text="{Binding SelectedIndex, ElementName=listWords, Converter={StaticResource Converter}}" />
                                 <Run Text="/" />
                                 <Run Text="{Binding Items.Count, Mode=OneWay, ElementName=listWords}" />
                             </TextBlock>

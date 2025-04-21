@@ -38,5 +38,11 @@ namespace Flashcards.Liblary.Repository
         /// <remarks>В методе производится новый запрос к БД, в отличии от метода <see cref="GetObservableCollection"/>,
         /// в котором возвращается отражение локального кеша без нового запроса в БД.</remarks>
         Task<IEnumerable<TId>> GetAllAsync();
+
+        /// <summary>Получение всех записей.</summary>
+        /// <returns>Последовательность со всеми записями.</returns>
+        /// <remarks>В методе производится новый запрос к БД, в отличии от метода <see cref="GetObservableCollection"/>,
+        /// в котором возвращается отражение локального кеша без нового запроса в БД.</remarks>
+        Task<bool> IsNameUnique(string name);
     }
 }

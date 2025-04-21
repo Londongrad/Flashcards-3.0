@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace Flashcards.Liblary.Repository
 {
-    /// <summary>Дженерик Репозиторий для БД,</summary>
+    /// <summary>Дженерик Репозиторий для БД</summary>
     public class DbRepository<TId> : IRepository<TId> where TId : IdDto
     {
         private readonly DbContext context;
