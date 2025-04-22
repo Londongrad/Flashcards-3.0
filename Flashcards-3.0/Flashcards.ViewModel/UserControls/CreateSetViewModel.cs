@@ -23,16 +23,24 @@ namespace Flashcards.ViewModels.UserControls
         public string Set { get => Get<string>()!; set => Set(value); }
 
         /// <summary>Название слова для добавления в сет</summary>
-        public string Word
-        { get => Get<string>()!; set { Set(value); } }
+        public string Word {  get => Get<string>()!; 
+            set 
+            {
+                ClearErrors();
+                if (string.IsNullOrEmpty(value))
+                {
+                    AddError("");
+                }
+                
+                Set(value); 
+            } 
+        }
 
         /// <summary>Определение слова для добавления в сет</summary>
-        public string Definition
-        { get => Get<string>()!; set { Set(value); } }
+        public string Definition { get => Get<string>()!; set { Set(value); } }
 
         /// <summary>Путь до картинки к слову</summary>
-        public string? ImagePath
-        { get => Get<string>(); set { Set(value); } }
+        public string? ImagePath { get => Get<string>(); set { Set(value); } }
 
         #endregion [ Properties ]
 

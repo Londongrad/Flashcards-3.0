@@ -15,7 +15,7 @@ namespace Flashcards.Liblary.ViewModelBase
         public IEnumerable GetErrors([CallerMemberName] string? propertyName = null)
         {
             ArgumentException.ThrowIfNullOrEmpty(propertyName);
-            return (IEnumerable)_propertyErrors.GetValue(propertyName);
+            return _propertyErrors.GetValueOrDefault(propertyName) ?? [];
         }
 
         public void AddError(string errorMessage, [CallerMemberName] string? propertyName = null)
@@ -34,6 +34,13 @@ namespace Flashcards.Liblary.ViewModelBase
         {
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
             RaisePropertyChanged(nameof(HasErrors));
+        }
+
+        public void ClearErrors([CallerMemberName] string? propertyName = null)
+        {
+            ArgumentException.ThrowIfNullOrEmpty(propertyName);
+            if (_propertyErrors.Remove(propertyName))
+                RaiseErrorsChanged(propertyName);
         }
     }
 }

@@ -80,7 +80,7 @@ namespace Flashcards.ViewModels.Windows
 
                     setVM.Clear();
                 },
-                setVM => !string.IsNullOrEmpty(setVM.Set) && !string.IsNullOrEmpty(setVM.Word)
+                setVM => !HasErrors
             );
 
         public RelayCommand DeleteSetCommand => GetCommand<Set>
