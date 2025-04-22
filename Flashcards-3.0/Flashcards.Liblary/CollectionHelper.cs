@@ -134,7 +134,7 @@ namespace Flashcards.Liblary
         /// <summary>Метод заменяющий или добавляющий элемент в индексированную коллекции.</summary>
         /// <typeparam name="T">Тип элемента коллекции.</typeparam>
         /// <param name="list">Индексированная коллекция.</param>
-        /// <param name="predicate">Предикат для поиска элемента в коллекции, котороый надо заменить.</param>
+        /// <param name="predicate">Предикат для поиска элемента в коллекции, который надо заменить.</param>
         /// <param name="newItem">Элемент на который будет заменён найденный элемент.</param>
         /// <returns><see langword="true"/> если элемент был найден и заменён,
         /// <see langword="false"/> - элемент не был найден и <paramref name="newItem"/> добаяляется в коллекцию.</returns>

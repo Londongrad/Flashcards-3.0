@@ -51,7 +51,6 @@
                             <Button Grid.Column="0"
                                     Style="{StaticResource SelectedSetButtons}"
                                     Content="Mix words"
-                                    Command="{Binding MixWordsCommand}"
                                     HorizontalAlignment="Left" />
 
                             <TextBlock Grid.Column="1"

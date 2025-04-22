@@ -1,12 +1,10 @@
-﻿using Flashcards.Liblary;
-using Flashcards.Liblary.ViewModelBase;
-using System.Collections;
+﻿using System.Collections;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Flashcards.ViewModels
+namespace Flashcards.Liblary.ViewModelBase
 {
-    public class ErrorsViewModel : ViewModelBase, INotifyDataErrorInfo
+    public abstract partial class ViewModelBase : INotifyDataErrorInfo
     {
         private readonly Dictionary<string, List<string>?> _propertyErrors = [];
 
@@ -33,7 +31,7 @@ namespace Flashcards.ViewModels
         }
 
         private void RaiseErrorsChanged([CallerMemberName] string? propertyName = null)
-        { 
+        {
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
             RaisePropertyChanged(nameof(HasErrors));
         }
