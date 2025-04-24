@@ -51,8 +51,7 @@
                     Grid.Row="1"
                     Grid.Column="2"
                     HorizontalAlignment="Left"
-                    Margin="0 0 0 15">
-            </Button>
+                    Margin="0 0 0 15" />
 
             <TextBlock Text="Word"
                        Style="{StaticResource TextBlock}"

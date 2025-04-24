@@ -50,7 +50,8 @@
             <ContentControl Grid.Column="1"
                             Margin="20"
                             Content="{Binding Path=(comm:INavigationService.Current),
-                                              ValidatesOnDataErrors=false}">
+                                              ValidatesOnDataErrors=false}"
+                            Validation.ErrorTemplate="{x:Null}">
             </ContentControl>
         </Grid>
     </Border>
