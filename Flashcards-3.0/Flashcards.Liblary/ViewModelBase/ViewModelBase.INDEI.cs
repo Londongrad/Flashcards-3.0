@@ -8,17 +8,19 @@ namespace Flashcards.Liblary.ViewModelBase
     {
         private readonly Dictionary<string, List<string>?> _propertyErrors = [];
 
-        public bool HasErrors => _propertyErrors.Count != 0;
+        public bool HasErrors { get => Get<bool>(); private set => Set(value); }
 
         public event EventHandler<DataErrorsChangedEventArgs>? ErrorsChanged;
 
         public IEnumerable GetErrors([CallerMemberName] string? propertyName = null)
         {
-            ArgumentException.ThrowIfNullOrEmpty(propertyName);
-            return _propertyErrors.GetValueOrDefault(propertyName) ?? [];
+            if (string.IsNullOrEmpty(propertyName) || !_propertyErrors.ContainsKey(propertyName))
+                return null;
+
+            return _propertyErrors[propertyName]!;
         }
 
-        public void AddError(string errorMessage, [CallerMemberName] string? propertyName = null)
+        protected void AddError(string errorMessage, [CallerMemberName] string? propertyName = null)
         {
             ArgumentException.ThrowIfNullOrEmpty(propertyName);
             if (!_propertyErrors.ContainsKey(propertyName))
@@ -30,13 +32,14 @@ namespace Flashcards.Liblary.ViewModelBase
             RaiseErrorsChanged(propertyName);
         }
 
-        private void RaiseErrorsChanged([CallerMemberName] string? propertyName = null)
+        protected void RaiseErrorsChanged([CallerMemberName] string? propertyName = null)
         {
+            HasErrors = _propertyErrors.Count > 0;
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
             RaisePropertyChanged(nameof(HasErrors));
         }
 
-        public void ClearErrors([CallerMemberName] string? propertyName = null)
+        protected void ClearErrors([CallerMemberName] string? propertyName = null)
         {
             ArgumentException.ThrowIfNullOrEmpty(propertyName);
             if (_propertyErrors.Remove(propertyName))

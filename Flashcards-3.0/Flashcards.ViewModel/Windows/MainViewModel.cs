@@ -113,23 +113,13 @@ namespace Flashcards.ViewModels.Windows
             await model.LoadAsync();
         }
 
-        /// <summary>
-        /// Нужен функционал проверки наличия слова в сете. Если слово есть, то нужно об этом уведомить View и установить Visibility у картинки в Visible.</br>
-        /// Также отключить кнопку Save the word, так как само слово должно быть УНИКАЛЬНЫМ по условию в базе.
-        /// </summary>
-        public bool CheckWordIfExists()
+        protected override void OnPropertyChanged(string propertyName, object? oldValue, object? newValue)
         {
-            if (!string.IsNullOrEmpty(createSetVM.Word))
+            base.OnPropertyChanged(propertyName, oldValue, newValue);
+            if (propertyName == nameof(HasErrors))
             {
-                foreach (var word in Words)
-                {
-                    if (word.Name == createSetVM.Word)
-                    {
-                        return true;
-                    }
-                }
+                SaveWordCommand.RaiseCanExecuteChanged();
             }
-            return false;
         }
 
         #endregion [ Methods ]
