@@ -30,7 +30,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <StackPanel VerticalAlignment="Center" >
+            <StackPanel VerticalAlignment="Center">
 
                 <RadioButton Content="Menu"
                              Style="{StaticResource MenuButtonTheme}"
@@ -49,7 +49,8 @@
 
             <ContentControl Grid.Column="1"
                             Margin="20"
-                            Content="{Binding Path=(comm:INavigationService.Current)}">
+                            Content="{Binding Path=(comm:INavigationService.Current),
+                                              ValidatesOnDataErrors=false}">
             </ContentControl>
         </Grid>
     </Border>
