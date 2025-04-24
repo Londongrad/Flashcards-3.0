@@ -6,12 +6,11 @@
         xmlns:comm="clr-namespace:Flashcards.Liblary;assembly=Flashcards.Liblary"
         xmlns:vm="clr-namespace:Flashcards.ViewModels.UserControls;assembly=Flashcards.ViewModels"
         mc:Ignorable="d"
-        Height="900"
-        Width="1500"
-        WindowStyle="None"
-        ResizeMode="CanResize"
+        Height="800"
+        MinHeight="600"
+        Width="1400"
+        MinWidth="1000"
         Background="Transparent"
-        AllowsTransparency="True"
         MouseLeftButtonDown="Window_MouseLeftButtonDown"
         WindowStartupLocation="CenterScreen"
         DataContext="{DynamicResource mainVM}">
@@ -19,43 +18,19 @@
     <Window.InputBindings>
         <KeyBinding Key="Down" />
         <KeyBinding Key="Right" />
-        <KeyBinding Key="Left"/>
-        <KeyBinding Key="Up"/>
+        <KeyBinding Key="Left" />
+        <KeyBinding Key="Up" />
     </Window.InputBindings>
 
-    <Border Background="#272544"
-            CornerRadius="40">
+    <Border Background="#272544">
         <Grid>
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="60" />
-                <RowDefinition />
-            </Grid.RowDefinitions>
-
-            <TextBlock Text="Vismut"
-                       VerticalAlignment="Top"
-                       HorizontalAlignment="Left"
-                       Foreground="White"
-                       FontSize="28"
-                       Margin="20,20,0,0" />
-
-            <Button Grid.Column="1"
-                    HorizontalAlignment="Right"
-                    Width="40"
-                    Height="40"
-                    Margin="0 0 40 0"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    Click="Button_Click">
-                <Image Source="/wwwroot/Images/shutdown.png" />
-            </Button>
-
-            <StackPanel VerticalAlignment="Center"
-                        Grid.Row="1">
+            <StackPanel VerticalAlignment="Center" >
 
                 <RadioButton Content="Menu"
                              Style="{StaticResource MenuButtonTheme}"
@@ -69,11 +44,10 @@
                              CommandParameter="{x:Type vm:SetsViewModel}" />
 
                 <RadioButton Content="Import"
-                             Style="{StaticResource MenuButtonTheme}"/>
+                             Style="{StaticResource MenuButtonTheme}" />
             </StackPanel>
 
             <ContentControl Grid.Column="1"
-                            Grid.Row="1"
                             Margin="20"
                             Content="{Binding Path=(comm:INavigationService.Current)}">
             </ContentControl>

@@ -6,7 +6,7 @@ namespace Flashcards.Liblary.ViewModelBase
 {
     public abstract partial class ViewModelBase : INotifyDataErrorInfo
     {
-        private readonly Dictionary<string, List<string>?> _propertyErrors = [];
+        private readonly Dictionary<string, HashSet<string>?> _propertyErrors = [];
 
         public bool HasErrors { get => Get<bool>(); private set => Set(value); }
 
@@ -14,10 +14,21 @@ namespace Flashcards.Liblary.ViewModelBase
 
         public IEnumerable GetErrors([CallerMemberName] string? propertyName = null)
         {
-            if (string.IsNullOrEmpty(propertyName) || !_propertyErrors.ContainsKey(propertyName))
-                return null;
-
-            return _propertyErrors[propertyName]!;
+            if (string.IsNullOrEmpty(propertyName))
+            {
+                foreach (var errors in _propertyErrors)
+                {
+                    foreach (var error in errors.Value ?? [])
+                    {
+                        yield return error;
+                    }
+                }
+            }
+            else
+            {
+                foreach (var error in _propertyErrors.GetValueOrDefault(propertyName) ?? [])
+                    yield return error;
+            }
         }
 
         protected void AddError(string errorMessage, [CallerMemberName] string? propertyName = null)
@@ -34,9 +45,8 @@ namespace Flashcards.Liblary.ViewModelBase
 
         protected void RaiseErrorsChanged([CallerMemberName] string? propertyName = null)
         {
-            HasErrors = _propertyErrors.Count > 0;
+            HasErrors = _propertyErrors.Count != 0;
             ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
-            RaisePropertyChanged(nameof(HasErrors));
         }
 
         protected void ClearErrors([CallerMemberName] string? propertyName = null)
