@@ -25,7 +25,7 @@ namespace Flashcards.ViewModels.Windows
         {
             this.model = model;
 
-            createSetVM = new();
+            createSetVM = new(model.Words);
             setsVM = new();
             setVM = new();
             SetVMProp = setVM;
@@ -80,7 +80,7 @@ namespace Flashcards.ViewModels.Windows
 
                     setVM.Clear();
                 },
-                setVM => !HasErrors
+                setVM => !setVM.HasErrors
             );
 
         public RelayCommand DeleteSetCommand => GetCommand<Set>

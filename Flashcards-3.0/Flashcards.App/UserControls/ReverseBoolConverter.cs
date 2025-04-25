@@ -4,11 +4,11 @@ using System.Windows.Data;
 
 namespace Flashcards.App.UserControls
 {
-    public class Converter : IValueConverter
+    class ReverseBoolConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (int)value + 1;
+            return !(bool)value;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

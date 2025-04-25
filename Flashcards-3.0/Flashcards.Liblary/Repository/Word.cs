@@ -1,11 +1,8 @@
 ﻿namespace Flashcards.Liblary.Repository
 {
     /// <summary>Иммутабельный класс для Word (Слово).</summary>
-    public class Word(int id, string name, string? definition, string? imagePath, bool isFavorite, bool isLastWord, int setId) : IdDto(id)
+    public class Word(int id, string name, string? definition, string? imagePath, bool isFavorite, bool isLastWord, int setId) : IdDto(id, name)
     {
-        /// <summary>Слово</summary>
-        public string Name { get; set; } = name;
-
         /// <summary>Определение слова</summary>
         public string? Definition { get; set; } = definition;
 

@@ -16,7 +16,7 @@
         <Setter Property="FontWeight"
                 Value="Light" />
         <Setter Property="Margin"
-                Value="0 0 0 15" />
+                Value="0 5" />
         <Setter Property="TextWrapping"
                 Value="WrapWithOverflow" />
         <Setter Property="TextAlignment"

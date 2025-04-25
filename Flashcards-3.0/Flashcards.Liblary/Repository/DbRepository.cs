@@ -64,12 +64,12 @@ namespace Flashcards.Liblary.Repository
             return context.Set<TId>().ToList().Select(b => b);
         });
 
-        private ReadOnlyObservableCollection<TId>? birdsReadOnlyObservableCollection;
+        private ReadOnlyObservableCollection<TId>? readOnlyObservableCollection;
 
         public ReadOnlyObservableCollection<TId> GetObservableCollection()
         {
-            birdsReadOnlyObservableCollection ??= new(dbSet.Local.ToObservableCollection());
-            return birdsReadOnlyObservableCollection;
+            readOnlyObservableCollection ??= new(dbSet.Local.ToObservableCollection());
+            return readOnlyObservableCollection;
         }
 
         public async Task UpdateAsync(TId idDto) => await Task.Run(() =>
@@ -92,6 +92,11 @@ namespace Flashcards.Liblary.Repository
 
             OnAllPropertiesChanged(tid);
         });
+
+        public bool IsUnique(string name)
+        {
+            return readOnlyObservableCollection!.Any(t => t.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+        }
 
         private static readonly PropertyChangedEventArgs args = new(string.Empty);
 

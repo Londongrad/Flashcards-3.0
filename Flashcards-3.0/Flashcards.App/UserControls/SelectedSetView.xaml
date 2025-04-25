@@ -11,7 +11,7 @@
              d:DesignWidth="900">
 
     <UserControl.Resources>
-        <local:Converter x:Key="Converter" />
+        <local:IncrementConverter x:Key="Converter" />
     </UserControl.Resources>
 
     <FrameworkElement.CommandBindings>

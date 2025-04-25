@@ -1,4 +1,5 @@
 ﻿using Flashcards.Liblary.Command;
+using Flashcards.Liblary.Repository;
 using Flashcards.Liblary.ViewModelBase;
 using Microsoft.Win32;
 
@@ -6,12 +7,15 @@ namespace Flashcards.ViewModels.UserControls
 {
     public class CreateSetViewModel : ViewModelBase
     {
-        public CreateSetViewModel()
+        private readonly IRepository<Word> _wordRepository;
+
+        public CreateSetViewModel(IRepository<Word> repository)
         {
             Id = 0;
             Set = string.Empty;
             Word = string.Empty;
             Definition = string.Empty;
+            _wordRepository = repository;
         }
 
         #region [ Properties ]
@@ -27,13 +31,13 @@ namespace Flashcards.ViewModels.UserControls
             set 
             {
                 ClearErrors();
-                if (string.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value) || _wordRepository.IsUnique(value))
                 {
                     AddError("");
                 }
                 
                 Set(value); 
-            } 
+            }
         }
 
         /// <summary>Определение слова для добавления в сет</summary>

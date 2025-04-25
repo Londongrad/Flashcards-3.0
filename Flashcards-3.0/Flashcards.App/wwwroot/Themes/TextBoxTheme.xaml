@@ -48,7 +48,7 @@
         <Setter Property="CaretBrush"
                 Value="AliceBlue" />
         <Setter Property="Margin"
-                Value="0 0 0 15" />
+                Value="0 5" />
         <Setter Property="Padding"
                 Value="5" />
         <Setter Property="TextWrapping"
