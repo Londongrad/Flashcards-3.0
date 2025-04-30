@@ -74,8 +74,19 @@
                    Grid.Row="4"
                    Grid.Column="2"
                    HorizontalAlignment="Left"
-                   Margin="0 5 5 5" />
-            <!--TODO Для Image выше нужен функционал, см в главной модели метод CheckWordIfExists-->
+                   Margin="0 5 5 5">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasErrors}"
+                                         Value="False">
+                                <Setter Property="Visibility"
+                                        Value="Hidden" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
 
             <TextBlock Text="Definition"
                        Style="{StaticResource TextBlock}"

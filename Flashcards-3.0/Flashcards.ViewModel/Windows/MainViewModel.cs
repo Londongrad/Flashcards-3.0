@@ -80,7 +80,7 @@ namespace Flashcards.ViewModels.Windows
 
                     setVM.Clear();
                 },
-                setVM => !setVM.HasErrors
+                setVM => !(setVM.HasErrors && string.IsNullOrEmpty(setVM.Word) && string.IsNullOrEmpty(setVM.Set))
             );
 
         public RelayCommand DeleteSetCommand => GetCommand<Set>
@@ -111,15 +111,6 @@ namespace Flashcards.ViewModels.Windows
         public async Task LoadAsync()
         {
             await model.LoadAsync();
-        }
-
-        protected override void OnPropertyChanged(string propertyName, object? oldValue, object? newValue)
-        {
-            base.OnPropertyChanged(propertyName, oldValue, newValue);
-            if (propertyName == nameof(HasErrors))
-            {
-                SaveWordCommand.RaiseCanExecuteChanged();
-            }
         }
 
         #endregion [ Methods ]

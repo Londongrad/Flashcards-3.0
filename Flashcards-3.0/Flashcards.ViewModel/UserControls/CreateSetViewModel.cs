@@ -11,11 +11,11 @@ namespace Flashcards.ViewModels.UserControls
 
         public CreateSetViewModel(IRepository<Word> repository)
         {
+            _wordRepository = repository;
             Id = 0;
             Set = string.Empty;
             Word = string.Empty;
             Definition = string.Empty;
-            _wordRepository = repository;
         }
 
         #region [ Properties ]
@@ -30,13 +30,14 @@ namespace Flashcards.ViewModels.UserControls
         public string Word {  get => Get<string>()!; 
             set 
             {
-                ClearErrors();
-                if (string.IsNullOrEmpty(value) || _wordRepository.IsUnique(value))
-                {
-                    AddError("");
-                }
+                //ClearErrors();
+                //if (_wordRepository.IsUnique(value).Result)
+                //{
+                //    AddError("");
+                //}
                 
-                Set(value); 
+                Set(value);
+                ValidateWordAsync();
             }
         }
 
@@ -82,6 +83,25 @@ namespace Flashcards.ViewModels.UserControls
             Word = string.Empty;
             Definition = string.Empty;
             ImagePath = null;
+        }
+
+        private async void ValidateWordAsync()
+        {
+            string word = Word; // кешируется валидируемое значение
+            AddError("Процесс валидации"); // Здесь обычно не стринг сообщение, а другой тип.
+
+            try
+            {
+                var error = await _wordRepository.IsUnique(word);
+                if (word != Word)
+                    return;
+
+                // Обработка возращённой ошибки.
+            }
+            catch
+            {
+                // Обработка исключений
+            }
         }
 
         #endregion [ Methods ]

@@ -39,6 +39,6 @@ namespace Flashcards.Liblary.Repository
         /// в котором возвращается отражение локального кеша без нового запроса в БД.</remarks>
         Task<IEnumerable<TId>> GetAllAsync();
 
-        bool IsUnique(string name);
+        Task<bool> IsUnique(string name);
     }
 }

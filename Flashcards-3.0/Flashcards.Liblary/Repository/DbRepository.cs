@@ -93,10 +93,11 @@ namespace Flashcards.Liblary.Repository
             OnAllPropertiesChanged(tid);
         });
 
-        public bool IsUnique(string name)
+        public async Task<bool> IsUnique(string name) => await Task.Run(() =>
         {
-            return readOnlyObservableCollection!.Any(t => t.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
-        }
+            using var context = contextCreator();
+            return context.Set<TId>().Any(w => w.Name == name);
+        });
 
         private static readonly PropertyChangedEventArgs args = new(string.Empty);
 
